@@ -1,0 +1,9 @@
+title: "PCCST501 Computer Networks with Arsha Krishna"
+description: "Lecture Notes, Labs, Assignments and Case Studies"
+
+theme: minima
+
+header_pages:
+  - about.md
+  - module1.md
+  - assignments.md
