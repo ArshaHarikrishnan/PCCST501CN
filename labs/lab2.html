@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>Experiment 2 | HTTP Packet Analysis using Wireshark | PCCST501</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{background:#f4f7fb;font-family:Arial}
+.hero{background:linear-gradient(135deg,#0d47a1,#1565c0);color:#fff;padding:70px 0}
+.card{border:none;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.1)}
+.section-title{border-left:5px solid #1565c0;padding-left:10px;margin:35px 0 20px}
+.command{background:#1e1e1e;color:#00ff88;padding:12px;border-radius:8px;font-family:Consolas}
+footer{background:#0d47a1;color:#fff;padding:20px;margin-top:40px}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark"><div class="container"><a class="navbar-brand" href="index.html">PCCST501</a></div></nav>
+
+<section class="hero text-center">
+<div class="container">
+<h1>🧪 Experiment 2</h1>
+<h3>HTTP Packet Analysis using Wireshark</h3>
+<p>Wireshark Based Experiment</p>
+</div>
+</section>
+
+<div class="container py-5">
+
+<div class="row g-3">
+<div class="col-md-3"><div class="card p-3 text-center"><h5>Experiment</h5><p>02</p></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><h5>Duration</h5><p>3 Hours</p></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><h5>Difficulty</h5><p>Beginner</p></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><h5>Category</h5><p>Wireshark</p></div></div>
+</div>
+
+<h2 class="section-title">🎯 Aim</h2>
+<div class="card p-4">
+<p>To capture and analyze HTTP request and response packets using Wireshark and understand the working of the HTTP protocol.</p>
+</div>
+
+<h2 class="section-title">📚 Learning Outcomes</h2>
+<div class="card p-4">
+<ul>
+<li>Capture HTTP packets.</li>
+<li>Analyze HTTP GET requests.</li>
+<li>Identify HTTP response packets.</li>
+<li>Interpret HTTP headers.</li>
+<li>Measure response time.</li>
+</ul>
+</div>
+
+<h2 class="section-title">💻 Software Required</h2>
+<div class="card p-4">
+<ul>
+<li>Wireshark</li>
+<li>Google Chrome / Firefox</li>
+<li>Internet Connection</li>
+</ul>
+</div>
+
+<h2 class="section-title">🔍 Wireshark Filter</h2>
+<div class="card p-4"><div class="command">http</div></div>
+
+<h2 class="section-title">📋 Procedure</h2>
+<div class="card p-4">
+<ol>
+<li>Open Wireshark.</li>
+<li>Start packet capture.</li>
+<li>Open a web browser.</li>
+<li>Visit a HTTP website.</li>
+<li>Stop packet capture.</li>
+<li>Apply the filter <b>http</b>.</li>
+<li>Observe the GET request and Response packet.</li>
+<li>Answer the analysis questions.</li>
+</ol>
+</div>
+
+<h2 class="section-title">📝 Analysis Questions</h2>
+<div class="card p-4">
+<ol>
+<li>Find the Source IP Address.</li>
+<li>Find the Destination IP Address.</li>
+<li>Identify the HTTP GET request.</li>
+<li>Find the requested URL.</li>
+<li>Find the User-Agent.</li>
+<li>Find the HTTP Status Code.</li>
+<li>Find the Content-Length.</li>
+<li>Find the Last Modified field.</li>
+<li>Calculate the response time.</li>
+</ol>
+</div>
+
+<h2 class="section-title">❓ Viva Questions</h2>
+<div class="card p-4">
+<ol>
+<li>What is Wireshark?</li>
+<li>What is HTTP?</li>
+<li>Difference between HTTP and HTTPS?</li>
+<li>What is GET Request?</li>
+<li>What is HTTP Status Code?</li>
+</ol>
+</div>
+
+<h2 class="section-title">📝 Assignment</h2>
+<div class="card p-4">
+<ul>
+<li>Capture HTTP packets.</li>
+<li>Identify GET request.</li>
+<li>Find Status Code.</li>
+<li>Take screenshots.</li>
+<li>Upload the report to your GitHub repository.</li>
+</ul>
+</div>
+
+<div class="d-flex justify-content-between mt-5">
+<a href="lab1.html" class="btn btn-outline-primary">← Previous Experiment</a>
+<a href="lab3.html" class="btn btn-primary">Next Experiment →</a>
+</div>
+
+</div>
+
+<footer class="text-center">
+<p>© 2026 PCCST501 Computer Networks | Ms. Arsha J K</p>
+</footer>
+
+</body>
+</html>
