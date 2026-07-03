@@ -1,27 +1,139 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lab 1 | Linux Network Detective | PCCST501</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><style>body{background:#f4f7fb;font-family:Arial;color:#1f2937}.hero{background:linear-gradient(135deg,#082f6b,#1565c0);color:#fff;padding:70px 0}.card{border:0;border-radius:16px;box-shadow:0 6px 20px #00000014}.section-title{border-left:5px solid #1565c0;padding-left:12px;margin:40px 0 20px}.cmd{background:#111827;color:#86efac;padding:14px;border-radius:10px;font-family:Consolas;white-space:pre-wrap}.special{border-left:5px solid #f59e0b}footer{background:#0d47a1;color:#fff;padding:22px;margin-top:50px}</style></head><body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"><div class="container"><a class="navbar-brand fw-bold" href="index.html">PCCST501</a><div class="navbar-nav ms-auto"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="modules.html">Modules</a><a class="nav-link active" href="networklab.html">Network Lab</a></div></div></nav>
-<section class="hero text-center"><div class="container"><h1>🕵️ Lab 1: Linux Network Detective</h1><p class="lead">Build a network profile of your own Linux system using evidence, not copied output.</p></div></section><main class="container py-5">
-<div class="row g-3"><div class="col-md-3"><div class="card p-3 text-center"><b>Experiment</b><span>01</span></div></div><div class="col-md-3"><div class="card p-3 text-center"><b>Mode</b><span>Individual</span></div></div><div class="col-md-3"><div class="card p-3 text-center"><b>Level</b><span>Foundation</span></div></div><div class="col-md-3"><div class="card p-3 text-center"><b>Evidence</b><span>Network Profile</span></div></div></div>
-<h2 class="section-title">🎯 Mission</h2><div class="card p-4">Investigate the network identity and connectivity of your Linux machine. Create an evidence-based profile containing interface details, IP configuration, gateway, DNS resolution, path information and active connections.</div>
-<h2 class="section-title">🧠 Questions to Discover</h2><div class="card p-4"><ul><li>Which interface carries your traffic?</li><li>What are your IPv4 address, prefix, MAC address and default gateway?</li><li>Can you reach a local gateway, a public IP and a domain name?</li><li>Which intermediate hops are visible?</li><li>Which TCP/UDP endpoints are active?</li></ul></div>
-<h2 class="section-title">🚀 Investigation Route</h2><div class="card p-4">
-<h5>1. Identify the machine</h5><div class="cmd">hostnamectl
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 1 | Linux Network Detective | PCCST501</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{background:#f4f7fb;font-family:Arial,sans-serif;color:#1f2937}
+.hero{background:linear-gradient(135deg,#082f6b,#1565c0);color:#fff;padding:70px 0}
+.card{border:0;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.info-card{height:100%}.info-card span{display:block;margin-top:6px}
+.section-title{border-left:5px solid #1565c0;padding-left:12px;margin:40px 0 20px}
+.cmd{background:#111827;color:#86efac;padding:14px;border-radius:10px;font-family:Consolas,"Courier New",monospace;white-space:pre-wrap;overflow-x:auto}
+.special{border-left:5px solid #f59e0b}
+footer{background:#0d47a1;color:#fff;padding:22px;margin-top:50px}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand fw-bold" href="index.html">PCCST501</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="mainNavbar">
+<div class="navbar-nav ms-auto">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="modules.html">Modules</a>
+<a class="nav-link active" aria-current="page" href="networklab.html">Network Lab</a>
+</div></div></div></nav>
+
+<section class="hero text-center"><div class="container">
+<h1>🕵️ Lab 1: Linux Network Detective</h1>
+<p class="lead mt-3">Build a network profile of your own Linux system using evidence, not copied output.</p>
+</div></section>
+
+<main class="container py-5">
+<div class="row g-3">
+<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Experiment</b><span>01</span></div></div>
+<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Mode</b><span>Individual</span></div></div>
+<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Level</b><span>Foundation</span></div></div>
+<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Evidence</b><span>Network Profile</span></div></div>
+</div>
+
+<h2 class="section-title">🎯 Mission</h2>
+<div class="card p-4"><p class="mb-0">Investigate the network identity and connectivity of your Linux machine. Create an evidence-based profile containing interface details, IP configuration, gateway, DNS resolution, path information and active connections.</p></div>
+
+<h2 class="section-title">🧠 Questions to Discover</h2>
+<div class="card p-4"><ul class="mb-0">
+<li>Which interface carries your traffic?</li>
+<li>What are your IPv4 address, prefix, MAC address and default gateway?</li>
+<li>Can you reach a local gateway, a public IP address and a domain name?</li>
+<li>Which intermediate hops are visible?</li>
+<li>Which TCP and UDP endpoints are active?</li>
+</ul></div>
+
+<h2 class="section-title">🚀 Investigation Route</h2>
+<div class="card p-4">
+<h5>1. Identify the Machine</h5>
+<div class="cmd">hostnamectl
 ip -brief address
-ip link show</div><hr>
-<h5>2. Find the way out</h5><div class="cmd">ip route</div><hr>
-<h5>3. Test connectivity in three stages</h5><div class="cmd">ping -c 4 &lt;default-gateway&gt;
+ip link show</div>
+<p class="mt-3">Record the active interface, IPv4 address, prefix and MAC address.</p><hr>
+
+<h5>2. Find the Way Out</h5>
+<div class="cmd">ip route</div>
+<p class="mt-3">Identify the default route and default gateway.</p><hr>
+
+<h5>3. Test Connectivity in Three Stages</h5>
+<div class="cmd">ping -c 4 &lt;default-gateway&gt;
 ping -c 4 8.8.8.8
-ping -c 4 example.com</div><hr>
-<h5>4. Follow the path</h5><div class="cmd">traceroute example.com
-mtr -r -c 10 example.com</div><hr>
-<h5>5. Ask DNS</h5><div class="cmd">nslookup example.com</div><hr>
-<h5>6. Observe local activity</h5><div class="cmd">ss -tuln
-nmcli device status</div><hr>
-<h5>7. Optional live observation</h5><div class="cmd">sudo iftop -i &lt;interface&gt;
-sudo tcpdump -i &lt;interface&gt; -c 10</div></div>
-<h2 class="section-title">📊 Network Profile Sheet</h2><div class="table-responsive"><table class="table table-bordered"><thead class="table-primary"><tr><th>Item</th><th>Your Observation</th><th>Command</th></tr></thead><tbody><tr><td>Active interface</td><td></td><td></td></tr><tr><td>IPv4 / prefix</td><td></td><td></td></tr><tr><td>MAC address</td><td></td><td></td></tr><tr><td>Default gateway</td><td></td><td></td></tr><tr><td>DNS server</td><td></td><td></td></tr><tr><td>Packet loss / RTT</td><td></td><td></td></tr><tr><td>Visible hops</td><td></td><td></td></tr></tbody></table></div>
-<h2 class="section-title">🏁 Student Challenge</h2><div class="card special p-4"><b>Network Health Verdict:</b> Classify the connection as Healthy, Partially Reachable, DNS Problem or High Latency. Support your verdict with at least three observations.</div>
-<h2 class="section-title">❓ Viva</h2><div class="card p-4"><ol><li>Why can ping to an IP succeed while ping to a domain fails?</li><li>Why is ip preferred over ifconfig?</li><li>What does a default gateway do?</li><li>Why can traceroute show * * *?</li><li>What is a listening socket?</li></ol></div>
-<h2 class="section-title">📤 Submission</h2><div class="card p-4"><p>Submit the completed profile, selected screenshots, verdict and a short conclusion.</p><div class="cmd">NetworkLab/Experiment01/README.md
-NetworkLab/Experiment01/screenshots/</div></div>
-<div class="d-flex justify-content-between mt-5"><a class="btn btn-outline-primary" href="networklab.html">← Previous</a><a class="btn btn-primary" href="lab2.html">Next →</a></div></main><footer class="text-center">© 2026 PCCST501 Computer Networks | Ms. Arsha J K</footer></body></html>
+ping -c 4 example.com</div>
+<p class="mt-3">Compare packet loss and average round-trip time. Explain what each test proves.</p><hr>
+
+<h5>4. Follow the Packet Path</h5>
+<div class="cmd">traceroute example.com
+mtr -r -c 10 example.com</div>
+<p class="mt-3">Record the number of visible hops. Asterisks may appear when an intermediate device does not reply.</p><hr>
+
+<h5>5. Ask DNS</h5>
+<div class="cmd">nslookup example.com</div>
+<p class="mt-3">Identify the DNS server and returned IP address.</p><hr>
+
+<h5>6. Observe Local Network Activity</h5>
+<div class="cmd">ss -tuln
+nmcli device status</div>
+<p class="mt-3">Observe listening TCP/UDP endpoints and the state of network devices.</p><hr>
+
+<h5>7. Optional Live Observation</h5>
+<div class="cmd">sudo iftop -i &lt;interface&gt;
+sudo tcpdump -i &lt;interface&gt; -c 10</div>
+<p class="mt-3 mb-0">Capture only traffic on networks and systems for which you have permission.</p>
+</div>
+
+<h2 class="section-title">📊 Network Profile Sheet</h2>
+<div class="table-responsive"><table class="table table-bordered align-middle">
+<thead class="table-primary"><tr><th>Item</th><th>Your Observation</th><th>Command Used</th></tr></thead>
+<tbody>
+<tr><td>Active Interface</td><td></td><td></td></tr>
+<tr><td>IPv4 Address / Prefix</td><td></td><td></td></tr>
+<tr><td>MAC Address</td><td></td><td></td></tr>
+<tr><td>Default Gateway</td><td></td><td></td></tr>
+<tr><td>DNS Server</td><td></td><td></td></tr>
+<tr><td>Packet Loss / RTT</td><td></td><td></td></tr>
+<tr><td>Visible Hops</td><td></td><td></td></tr>
+</tbody></table></div>
+
+<h2 class="section-title">🏁 Student Challenge</h2>
+<div class="card special p-4">
+<p><b>Network Health Verdict:</b> Classify your connection as:</p>
+<ul><li>Healthy</li><li>Partially Reachable</li><li>DNS Problem</li><li>High Latency</li></ul>
+<p class="mb-0">Support your verdict using at least three observations collected during the experiment.</p>
+</div>
+
+<h2 class="section-title">❓ Viva Questions</h2>
+<div class="card p-4"><ol class="mb-0">
+<li>Why can ping to an IP address succeed while ping to a domain name fails?</li>
+<li>Why is the <code>ip</code> command preferred over <code>ifconfig</code> on modern Linux systems?</li>
+<li>What does a default gateway do?</li>
+<li>Why can traceroute display <code>* * *</code> for some intermediate hops?</li>
+<li>What is the difference between a listening socket and an established connection?</li>
+</ol></div>
+
+<h2 class="section-title">📤 Submission</h2>
+<div class="card p-4">
+<p>Submit the completed Network Profile Sheet, selected screenshots, Network Health Verdict and a short conclusion.</p>
+<div class="cmd">NetworkLab/Experiment01/README.md
+NetworkLab/Experiment01/screenshots/</div>
+</div>
+
+<div class="d-flex justify-content-between mt-5">
+<a class="btn btn-outline-primary" href="networklab.html">← Network Lab</a>
+<a class="btn btn-primary" href="lab2.html">Next Experiment →</a>
+</div>
+</main>
+
+<footer class="text-center">© 2026 PCCST501 Computer Networks | Ms. Arsha J K</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
