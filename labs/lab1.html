@@ -1,139 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lab 1 | Linux Network Detective | PCCST501</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-body{background:#f4f7fb;font-family:Arial,sans-serif;color:#1f2937}
-.hero{background:linear-gradient(135deg,#082f6b,#1565c0);color:#fff;padding:70px 0}
-.card{border:0;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.08)}
-.info-card{height:100%}.info-card span{display:block;margin-top:6px}
-.section-title{border-left:5px solid #1565c0;padding-left:12px;margin:40px 0 20px}
-.cmd{background:#111827;color:#86efac;padding:14px;border-radius:10px;font-family:Consolas,"Courier New",monospace;white-space:pre-wrap;overflow-x:auto}
-.special{border-left:5px solid #f59e0b}
-footer{background:#0d47a1;color:#fff;padding:22px;margin-top:50px}
-</style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-<div class="container">
-<a class="navbar-brand fw-bold" href="index.html">PCCST501</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-<div class="collapse navbar-collapse" id="mainNavbar">
-<div class="navbar-nav ms-auto">
-<a class="nav-link" href="index.html">Home</a>
-<a class="nav-link" href="modules.html">Modules</a>
-<a class="nav-link active" aria-current="page" href="networklab.html">Network Lab</a>
-</div></div></div></nav>
-
-<section class="hero text-center"><div class="container">
-<h1>🕵️ Lab 1: Linux Network Detective</h1>
-<p class="lead mt-3">Build a network profile of your own Linux system using evidence, not copied output.</p>
-</div></section>
-
+body{background:#f4f7fb;font-family:Arial,sans-serif;color:#1f2937}.hero{background:linear-gradient(135deg,#082f6b,#1565c0);color:#fff;padding:70px 0}.hero .lead{max-width:900px;margin:auto}.card{border:0;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.08)}.section-title{border-left:5px solid #1565c0;padding-left:12px;margin:40px 0 20px}.cmd{background:#111827;color:#86efac;padding:14px;border-radius:10px;font-family:Consolas,"Courier New",monospace;white-space:pre-wrap;overflow-x:auto}.special{border-left:5px solid #f59e0b}.note{border-left:5px solid #0d6efd;background:#eef6ff}.tool{font-size:.88rem;margin:4px;padding:8px 10px}footer{background:#0d47a1;color:#fff;padding:22px;margin-top:50px}
+</style></head><body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"><div class="container"><a class="navbar-brand fw-bold" href="index.html">PCCST501</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="mainNavbar"><div class="navbar-nav ms-auto"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="module.html">Experiments</a><a class="nav-link active" href="lab1.html">Lab 1</a></div></div></div></nav>
+<section class="hero text-center"><div class="container"><p class="text-uppercase fw-bold">Warm-up Experiment</p><h1>🕵️ Lab 1: Linux Network Detective</h1><p class="lead mt-3">Investigate network identity, connectivity, routes, services, performance and live traffic using the complete Linux networking command set in the syllabus.</p></div></section>
 <main class="container py-5">
-<div class="row g-3">
-<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Experiment</b><span>01</span></div></div>
-<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Mode</b><span>Individual</span></div></div>
-<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Level</b><span>Foundation</span></div></div>
-<div class="col-md-3"><div class="card info-card p-3 text-center"><b>Evidence</b><span>Network Profile</span></div></div>
-</div>
-
-<h2 class="section-title">🎯 Mission</h2>
-<div class="card p-4"><p class="mb-0">Investigate the network identity and connectivity of your Linux machine. Create an evidence-based profile containing interface details, IP configuration, gateway, DNS resolution, path information and active connections.</p></div>
-
-<h2 class="section-title">🧠 Questions to Discover</h2>
-<div class="card p-4"><ul class="mb-0">
-<li>Which interface carries your traffic?</li>
-<li>What are your IPv4 address, prefix, MAC address and default gateway?</li>
-<li>Can you reach a local gateway, a public IP address and a domain name?</li>
-<li>Which intermediate hops are visible?</li>
-<li>Which TCP and UDP endpoints are active?</li>
-</ul></div>
-
-<h2 class="section-title">🚀 Investigation Route</h2>
-<div class="card p-4">
-<h5>1. Identify the Machine</h5>
-<div class="cmd">hostnamectl
-ip -brief address
-ip link show</div>
-<p class="mt-3">Record the active interface, IPv4 address, prefix and MAC address.</p><hr>
-
-<h5>2. Find the Way Out</h5>
-<div class="cmd">ip route</div>
-<p class="mt-3">Identify the default route and default gateway.</p><hr>
-
-<h5>3. Test Connectivity in Three Stages</h5>
-<div class="cmd">ping -c 4 &lt;default-gateway&gt;
+<div class="row g-3"><div class="col-md-3"><div class="card p-3 text-center"><b>Experiment</b><span>01</span></div></div><div class="col-md-3"><div class="card p-3 text-center"><b>Mode</b><span>Individual</span></div></div><div class="col-md-3"><div class="card p-3 text-center"><b>Level</b><span>Foundation</span></div></div><div class="col-md-3"><div class="card p-3 text-center"><b>Evidence</b><span>Detective Report</span></div></div></div>
+<h2 class="section-title">🎯 Aim</h2><div class="card p-4"><p class="mb-0">To familiarize students with <strong>ifconfig, ifplugstatus, iftop, ping, ip, traceroute, mtr, netstat, whois, nmap, nmcli, speedtest-cli, bmon, nslookup and tcpdump</strong>, and interpret the network information produced by each tool.</p></div>
+<h2 class="section-title">🧰 Complete Command Toolkit</h2><div class="card p-4"><span class="badge bg-primary tool">ifconfig</span><span class="badge bg-primary tool">ifplugstatus</span><span class="badge bg-primary tool">ip</span><span class="badge bg-primary tool">nmcli</span><span class="badge bg-primary tool">ping</span><span class="badge bg-primary tool">traceroute</span><span class="badge bg-primary tool">mtr</span><span class="badge bg-primary tool">netstat</span><span class="badge bg-primary tool">whois</span><span class="badge bg-primary tool">nslookup</span><span class="badge bg-primary tool">nmap</span><span class="badge bg-primary tool">speedtest-cli</span><span class="badge bg-primary tool">iftop</span><span class="badge bg-primary tool">bmon</span><span class="badge bg-primary tool">tcpdump</span></div>
+<h2 class="section-title">⚙️ Before You Begin</h2><div class="card note p-4"><p>Some tools may need installation on Ubuntu/Debian:</p><div class="cmd">sudo apt update
+sudo apt install net-tools ifplugd iftop traceroute mtr-tiny whois nmap network-manager speedtest-cli bmon dnsutils tcpdump</div><p class="mt-3 mb-0">Use <code>nmap</code> and <code>tcpdump</code> only on systems and networks for which you have permission.</p></div>
+<h2 class="section-title">🚀 Investigation Route</h2><div class="row g-4"><div class="col-lg-6"><div class="card h-100 p-4"><h4>1. Legacy Interface View</h4><p><strong>Command:</strong> <code>ifconfig</code></p><div class="cmd">ifconfig
+ifconfig -a</div><p class="mt-3 mb-0"><strong>Task:</strong> Find interface, IPv4 address, netmask, MAC address, RX and TX statistics.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>2. Physical Link Check</h4><p><strong>Command:</strong> <code>ifplugstatus</code></p><div class="cmd">ifplugstatus
+ifplugstatus &lt;interface&gt;</div><p class="mt-3 mb-0"><strong>Task:</strong> Check whether a wired interface reports a connected physical link.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>3. Modern IP Investigation</h4><p><strong>Command:</strong> <code>ip</code></p><div class="cmd">ip -brief address
+ip link show
+ip route</div><p class="mt-3 mb-0"><strong>Task:</strong> Find interface state, IP/prefix, MAC address, default route and gateway.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>4. NetworkManager Status</h4><p><strong>Command:</strong> <code>nmcli</code></p><div class="cmd">nmcli device status
+nmcli connection show --active</div><p class="mt-3 mb-0"><strong>Task:</strong> Find device type, state and active network profile.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>5. Three-Stage Reachability Test</h4><p><strong>Command:</strong> <code>ping</code></p><div class="cmd">ping -c 4 &lt;default-gateway&gt;
 ping -c 4 8.8.8.8
-ping -c 4 example.com</div>
-<p class="mt-3">Compare packet loss and average round-trip time. Explain what each test proves.</p><hr>
-
-<h5>4. Follow the Packet Path</h5>
-<div class="cmd">traceroute example.com
-mtr -r -c 10 example.com</div>
-<p class="mt-3">Record the number of visible hops. Asterisks may appear when an intermediate device does not reply.</p><hr>
-
-<h5>5. Ask DNS</h5>
-<div class="cmd">nslookup example.com</div>
-<p class="mt-3">Identify the DNS server and returned IP address.</p><hr>
-
-<h5>6. Observe Local Network Activity</h5>
-<div class="cmd">ss -tuln
-nmcli device status</div>
-<p class="mt-3">Observe listening TCP/UDP endpoints and the state of network devices.</p><hr>
-
-<h5>7. Optional Live Observation</h5>
-<div class="cmd">sudo iftop -i &lt;interface&gt;
-sudo tcpdump -i &lt;interface&gt; -c 10</div>
-<p class="mt-3 mb-0">Capture only traffic on networks and systems for which you have permission.</p>
-</div>
-
-<h2 class="section-title">📊 Network Profile Sheet</h2>
-<div class="table-responsive"><table class="table table-bordered align-middle">
-<thead class="table-primary"><tr><th>Item</th><th>Your Observation</th><th>Command Used</th></tr></thead>
-<tbody>
-<tr><td>Active Interface</td><td></td><td></td></tr>
-<tr><td>IPv4 Address / Prefix</td><td></td><td></td></tr>
-<tr><td>MAC Address</td><td></td><td></td></tr>
-<tr><td>Default Gateway</td><td></td><td></td></tr>
-<tr><td>DNS Server</td><td></td><td></td></tr>
-<tr><td>Packet Loss / RTT</td><td></td><td></td></tr>
-<tr><td>Visible Hops</td><td></td><td></td></tr>
-</tbody></table></div>
-
-<h2 class="section-title">🏁 Student Challenge</h2>
-<div class="card special p-4">
-<p><b>Network Health Verdict:</b> Classify your connection as:</p>
-<ul><li>Healthy</li><li>Partially Reachable</li><li>DNS Problem</li><li>High Latency</li></ul>
-<p class="mb-0">Support your verdict using at least three observations collected during the experiment.</p>
-</div>
-
-<h2 class="section-title">❓ Viva Questions</h2>
-<div class="card p-4"><ol class="mb-0">
-<li>Why can ping to an IP address succeed while ping to a domain name fails?</li>
-<li>Why is the <code>ip</code> command preferred over <code>ifconfig</code> on modern Linux systems?</li>
-<li>What does a default gateway do?</li>
-<li>Why can traceroute display <code>* * *</code> for some intermediate hops?</li>
-<li>What is the difference between a listening socket and an established connection?</li>
-</ol></div>
-
-<h2 class="section-title">📤 Submission</h2>
-<div class="card p-4">
-<p>Submit the completed Network Profile Sheet, selected screenshots, Network Health Verdict and a short conclusion.</p>
-<div class="cmd">NetworkLab/Experiment01/README.md
-NetworkLab/Experiment01/screenshots/</div>
-</div>
-
-<div class="d-flex justify-content-between mt-5">
-<a class="btn btn-outline-primary" href="networklab.html">← Network Lab</a>
-<a class="btn btn-primary" href="lab2.html">Next Experiment →</a>
-</div>
-</main>
-
-<footer class="text-center">© 2026 PCCST501 Computer Networks | Ms. Arsha J K</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+ping -c 4 example.com</div><p class="mt-3 mb-0"><strong>Task:</strong> Compare local reachability, Internet reachability and DNS-based reachability.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>6. Route Investigator</h4><p><strong>Command:</strong> <code>traceroute</code></p><div class="cmd">traceroute example.com</div><p class="mt-3 mb-0"><strong>Task:</strong> Record visible intermediate hops and missing replies.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>7. Continuous Path Health</h4><p><strong>Command:</strong> <code>mtr</code></p><div class="cmd">mtr -r -c 10 example.com</div><p class="mt-3 mb-0"><strong>Task:</strong> Observe repeated hop-by-hop loss and latency statistics.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>8. Connection Inspector</h4><p><strong>Command:</strong> <code>netstat</code></p><div class="cmd">netstat -tuln
+netstat -rn</div><p class="mt-3 mb-0"><strong>Task:</strong> Find listening TCP/UDP ports and the routing table.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>9. Domain Registration Detective</h4><p><strong>Command:</strong> <code>whois</code></p><div class="cmd">whois example.com</div><p class="mt-3 mb-0"><strong>Task:</strong> Observe publicly available registrar and registration information.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>10. DNS Investigator</h4><p><strong>Command:</strong> <code>nslookup</code></p><div class="cmd">nslookup example.com</div><p class="mt-3 mb-0"><strong>Task:</strong> Find the DNS server used and the returned IP address.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>11. Approved Host Scan</h4><p><strong>Command:</strong> <code>nmap</code></p><div class="cmd">nmap localhost
+nmap -sV &lt;instructor-approved-target&gt;</div><p class="mt-3 mb-0"><strong>Task:</strong> Find open ports and detected services only on authorized targets.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>12. Internet Performance Test</h4><p><strong>Command:</strong> <code>speedtest-cli</code></p><div class="cmd">speedtest-cli</div><p class="mt-3 mb-0"><strong>Task:</strong> Record latency, download speed and upload speed.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>13. Live Bandwidth Conversation</h4><p><strong>Command:</strong> <code>iftop</code></p><div class="cmd">sudo iftop -i &lt;interface&gt;</div><p class="mt-3 mb-0"><strong>Task:</strong> Observe endpoint pairs exchanging traffic and approximate rates.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>14. Interface Bandwidth Monitor</h4><p><strong>Command:</strong> <code>bmon</code></p><div class="cmd">bmon</div><p class="mt-3 mb-0"><strong>Task:</strong> Observe receive and transmit activity over time.</p></div></div><div class="col-lg-6"><div class="card h-100 p-4"><h4>15. Packet Evidence Collector</h4><p><strong>Command:</strong> <code>tcpdump</code></p><div class="cmd">sudo tcpdump -D
+sudo tcpdump -i &lt;interface&gt; -c 10
+sudo tcpdump -i &lt;interface&gt; icmp -c 5</div><p class="mt-3 mb-0"><strong>Task:</strong> Observe timestamps, endpoints and protocol information on permitted traffic.</p></div></div></div>
+<h2 class="section-title">📊 Network Detective Report</h2><div class="table-responsive"><table class="table table-bordered align-middle"><thead class="table-primary"><tr><th>Investigation</th><th>Command</th><th>Your Observation</th></tr></thead><tbody><tr><td>Legacy Interface View</td><td>ifconfig</td><td></td></tr><tr><td>Physical Link Check</td><td>ifplugstatus</td><td></td></tr><tr><td>Modern IP Investigation</td><td>ip</td><td></td></tr><tr><td>NetworkManager Status</td><td>nmcli</td><td></td></tr><tr><td>Three-Stage Reachability Test</td><td>ping</td><td></td></tr><tr><td>Route Investigator</td><td>traceroute</td><td></td></tr><tr><td>Continuous Path Health</td><td>mtr</td><td></td></tr><tr><td>Connection Inspector</td><td>netstat</td><td></td></tr><tr><td>Domain Registration Detective</td><td>whois</td><td></td></tr><tr><td>DNS Investigator</td><td>nslookup</td><td></td></tr><tr><td>Approved Host Scan</td><td>nmap</td><td></td></tr><tr><td>Internet Performance Test</td><td>speedtest-cli</td><td></td></tr><tr><td>Live Bandwidth Conversation</td><td>iftop</td><td></td></tr><tr><td>Interface Bandwidth Monitor</td><td>bmon</td><td></td></tr><tr><td>Packet Evidence Collector</td><td>tcpdump</td><td></td></tr></tbody></table></div>
+<h2 class="section-title">🏁 Student Challenge</h2><div class="card special p-4"><h5>Network Health Verdict</h5><p>Classify the connection as <strong>Healthy, Partially Reachable, DNS Problem, High Latency, or Interface/Link Problem</strong>.</p><p class="mb-0">Support the verdict using at least <strong>five observations from five different commands</strong>. Do not simply paste terminal output.</p></div>
+<h2 class="section-title">❓ Viva Questions</h2><div class="card p-4"><ol class="mb-0"><li>How do <code>ifconfig</code> and <code>ip</code> differ?</li><li>What does <code>ifplugstatus</code> check?</li><li>Why can ping to an IP succeed while ping to a domain fails?</li><li>How are <code>traceroute</code> and <code>mtr</code> different?</li><li>What can <code>netstat</code> show?</li><li>How do <code>whois</code> and <code>nslookup</code> differ?</li><li>Why must <code>nmap</code> be restricted to authorized targets?</li><li>How do <code>iftop</code> and <code>bmon</code> differ?</li><li>What do download and upload speeds represent?</li><li>What information can <code>tcpdump</code> reveal?</li></ol></div>
+<h2 class="section-title">📤 Submission</h2><div class="card p-4"><ul><li>Completed Network Detective Report</li><li>Selected screenshots of your own observations</li><li>Network Health Verdict with five supporting observations</li><li>Short conclusion</li></ul><div class="cmd">NetworkLab/Experiment01/README.md
+NetworkLab/Experiment01/screenshots/</div></div>
+<div class="d-flex justify-content-between mt-5"><a class="btn btn-outline-primary" href="module.html">← All Experiments</a><a class="btn btn-primary" href="lab2.html">Next Experiment →</a></div>
+</main><footer class="text-center">© 2026 PCCST501 Computer Networks | Ms. Arsha J K</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script></body></html>
