@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 5 | TCP Matrix Classifier | PCCSL507</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{background:#f4f7fb;font-family:Arial,sans-serif;color:#1f2937}
+.hero{background:linear-gradient(135deg,#7c2d12,#ea580c);color:#fff;padding:70px 0}
+.hero .lead{max-width:920px;margin:auto}
+.card{border:0;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.section-title{border-left:5px solid #ea580c;padding-left:12px;margin:40px 0 20px}
+.cmd{background:#111827;color:#86efac;padding:14px;border-radius:10px;font-family:Consolas,"Courier New",monospace;white-space:pre-wrap;overflow-x:auto}
+.step{height:100%;border-top:5px solid #ea580c;transition:.3s}.step:hover{transform:translateY(-6px)}
+.note{border-left:5px solid #0d6efd;background:#eef6ff}.special{border-left:5px solid #ea580c}
+.chip{display:inline-block;background:#fff1e8;color:#c2410c;border-radius:999px;padding:7px 12px;margin:4px;font-family:Consolas,monospace;font-weight:bold}
+.flow{font-size:1.05rem;text-align:center}
+footer{background:#7c2d12;color:#fff;padding:22px;margin-top:50px}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"><div class="container">
+<a class="navbar-brand fw-bold" href="../networklab.html">PCCSL507</a>
+<div class="navbar-nav ms-auto"><a class="nav-link" href="../networklab.html">Home</a><a class="nav-link" href="module.html">Experiments</a><a class="nav-link active" href="lab5.html">Lab 5</a></div>
+</div></nav>
+
+<section class="hero text-center"><div class="container">
+<p class="text-uppercase fw-bold">TCP Socket Programming Mission</p>
+<h1>🔢 Lab 5: TCP Matrix Classifier</h1>
+<p class="lead mt-3">Build a client that creates a random square matrix, sends it through a TCP connection, and asks the server to identify its structural type.</p>
+</div></section>
+
+<main class="container py-5">
+<div class="row g-3">
+<div class="col-md-3"><div class="card p-3 text-center"><b>Experiment</b><span>05</span></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><b>Model</b><span>Client–Server</span></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><b>Protocol</b><span>TCP</span></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><b>Result</b><span>Matrix Type</span></div></div>
+</div>
+
+<h2 class="section-title">🎯 Aim</h2>
+<div class="card p-4">To implement TCP client–server communication in which the client creates an N × N matrix with random integers in the range [1, 50], sends it to the server, and receives the matrix classification as a string.</div>
+
+<h2 class="section-title">🧩 The Mission</h2>
+<div class="row g-4">
+<div class="col-md-6 col-lg-3"><div class="card step p-4"><h3>1️⃣ Input</h3><p>Client reads the order <strong>N</strong>.</p><span class="chip">N × N</span></div></div>
+<div class="col-md-6 col-lg-3"><div class="card step p-4"><h3>2️⃣ Generate</h3><p>Populate the matrix using random values from 1 to 50.</p><span class="chip">rand()</span></div></div>
+<div class="col-md-6 col-lg-3"><div class="card step p-4"><h3>3️⃣ Send</h3><p>Transmit N and the matrix through a TCP socket.</p><span class="chip">send()</span></div></div>
+<div class="col-md-6 col-lg-3"><div class="card step p-4"><h3>4️⃣ Classify</h3><p>Server checks the matrix and returns a result string.</p><span class="chip">recv()</span></div></div>
+</div>
+
+<h2 class="section-title">🔄 Communication Flow</h2>
+<div class="card p-4 flow">
+<div class="cmd">CLIENT                                      SERVER
+  |                                            |
+  |--- TCP connection ------------------------>|
+  |                                            |
+  |--- Order N ------------------------------->|
+  |--- Matrix elements ----------------------->|
+  |                                            |  Check matrix
+  |                                            |  type
+  |<-- "Upper/Lower/Diagonal/Other" -----------|
+  |                                            |
+  |--- Close connection ---------------------->|</div>
+</div>
+
+<h2 class="section-title">🧠 Classification Rules</h2>
+<div class="card p-4">
+<ul class="mb-0">
+<li><strong>Upper triangular:</strong> every element below the main diagonal is zero.</li>
+<li><strong>Lower triangular:</strong> every element above the main diagonal is zero.</li>
+<li><strong>Diagonal:</strong> every off-diagonal element is zero.</li>
+<li><strong>Other:</strong> the matrix does not satisfy any of the above conditions.</li>
+</ul>
+</div>
+
+<h2 class="section-title">⚠️ Detective Twist</h2>
+<div class="card note p-4">
+<p><strong>Think before coding:</strong> if every matrix element is generated only in the range [1, 50], no element can be zero. Therefore, for N &gt; 1, a randomly generated matrix cannot normally be upper triangular, lower triangular, or diagonal.</p>
+<p class="mb-0"><strong>Your task:</strong> first implement the specification exactly. Then explain this limitation in your observation. For meaningful testing, create separate instructor-approved test matrices containing zeros.</p>
+</div>
+
+<h2 class="section-title">🖥️ Client Responsibilities</h2>
+<div class="card p-4">
+<ol class="mb-0">
+<li>Create a TCP socket.</li>
+<li>Connect to the server IP address and port.</li>
+<li>Read the matrix order N.</li>
+<li>Generate and display the N × N matrix.</li>
+<li>Send N followed by all matrix elements.</li>
+<li>Receive the classification string.</li>
+<li>Print the server's result and close the socket.</li>
+</ol>
+</div>
+
+<h2 class="section-title">🗄️ Server Responsibilities</h2>
+<div class="card p-4">
+<ol class="mb-0">
+<li>Create a TCP socket.</li>
+<li>Bind it to a port and listen for a client.</li>
+<li>Accept the incoming connection.</li>
+<li>Receive N and the complete matrix.</li>
+<li>Check diagonal status first, then upper/lower triangular conditions.</li>
+<li>Send the classification as a string.</li>
+<li>Close the connected and listening sockets.</li>
+</ol>
+</div>
+
+<h2 class="section-title">🧪 Test Strategy</h2>
+<div class="table-responsive"><table class="table table-bordered align-middle">
+<thead class="table-primary"><tr><th>Test</th><th>Matrix Idea</th><th>Expected Result</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Random values strictly in [1,50], N &gt; 1</td><td>Other / None of these</td></tr>
+<tr><td>2</td><td>Zeros below main diagonal</td><td>Upper triangular</td></tr>
+<tr><td>3</td><td>Zeros above main diagonal</td><td>Lower triangular</td></tr>
+<tr><td>4</td><td>Zeros in every off-diagonal position</td><td>Diagonal</td></tr>
+<tr><td>5</td><td>N = 1</td><td>Discuss classification priority</td></tr>
+</tbody></table></div>
+
+<h2 class="section-title">📋 Observation Record</h2>
+<div class="table-responsive"><table class="table table-bordered">
+<thead class="table-primary"><tr><th>Evidence</th><th>Your Observation</th></tr></thead>
+<tbody>
+<tr><td>Server IP address</td><td></td></tr>
+<tr><td>Server port number</td><td></td></tr>
+<tr><td>Matrix order N</td><td></td></tr>
+<tr><td>Generated matrix</td><td></td></tr>
+<tr><td>Number of bytes/data items sent</td><td></td></tr>
+<tr><td>Classification returned by server</td><td></td></tr>
+<tr><td>Why the result is correct</td><td></td></tr>
+<tr><td>Limitation of random range [1,50]</td><td></td></tr>
+</tbody></table></div>
+
+<h2 class="section-title">🏁 Final Challenge</h2>
+<div class="card special p-4">
+<h5>Prove the Server Is Correct</h5>
+<p>Run at least four test cases and show that the server correctly distinguishes upper triangular, lower triangular, diagonal and other matrices.</p>
+<p class="mb-0">For each case, submit the matrix, server result and one-sentence justification.</p>
+</div>
+
+<h2 class="section-title">❓ Viva Questions</h2>
+<div class="card p-4"><ol class="mb-0">
+<li>Why is TCP suitable for sending a matrix?</li>
+<li>What is the purpose of <code>bind()</code>, <code>listen()</code> and <code>accept()</code>?</li>
+<li>Why should the client send N before the matrix?</li>
+<li>How does the server identify an upper triangular matrix?</li>
+<li>How does a diagonal matrix satisfy both triangular conditions?</li>
+<li>Why does classification order matter?</li>
+<li>What problem arises from generating values only in [1,50]?</li>
+<li>Can one call to <code>recv()</code> always be assumed to return all TCP data?</li>
+<li>What happens if client and server use different data representations?</li>
+<li>How would you extend the server to handle multiple clients?</li>
+</ol></div>
+
+<h2 class="section-title">📤 Submission</h2>
+<div class="card p-4">
+<ul><li>Client source code</li><li>Server source code</li><li>Screenshots of client and server execution</li><li>Four test cases with expected and actual results</li><li>Completed observation record</li><li>Short conclusion</li></ul>
+<div class="cmd">NetworkLab/Experiment05/
+├── client.c
+├── server.c
+├── README.md
+└── screenshots/</div>
+</div>
+
+<div class="d-flex justify-content-between mt-5">
+<a class="btn btn-outline-primary" href="lab4.html">← Previous Experiment</a>
+<a class="btn btn-primary" href="lab6.html">Next Experiment →</a>
+</div>
+</main>
+<footer class="text-center">© 2026 PCCSL507 Networks Lab | Ms. Arsha J K</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>
