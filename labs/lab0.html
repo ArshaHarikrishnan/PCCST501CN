@@ -1107,6 +1107,451 @@ when assigning the port number.
 </div>
 
 </section>
+<!-- ===================== IP ADDRESS CONVERSION ===================== -->
 
+<section class="py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<span class="badge bg-info">Hands-on Activity 2</span>
+
+<h2 class="fw-bold mt-3">
+IP Address Conversion
+</h2>
+
+<p>
+Convert an IPv4 address between text format and binary format.
+</p>
+
+</div>
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+Program
+</div>
+
+<div class="card-body">
+
+<pre class="bg-dark text-light p-4 rounded">
+
+struct in_addr addr;
+
+char ip[INET_ADDRSTRLEN];
+
+inet_pton(AF_INET,
+          "192.168.1.10",
+          &addr);
+
+inet_ntop(AF_INET,
+          &addr,
+          ip,
+          sizeof(ip));
+
+printf("%s", ip);
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="card shadow">
+
+<div class="card-header bg-success text-white">
+Expected Output
+</div>
+
+<div class="card-body bg-dark text-success">
+
+<pre>
+
+192.168.1.10
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="alert alert-info mt-4">
+
+<strong>Try This:</strong>
+
+Replace
+
+<b>192.168.1.10</b>
+
+with
+
+<ul>
+
+<li>127.0.0.1</li>
+
+<li>8.8.8.8</li>
+
+<li>1.1.1.1</li>
+
+</ul>
+
+Observe the output.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== BYTE ORDERING ===================== -->
+
+<section class="py-5 bg-light">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<span class="badge bg-warning text-dark">
+
+Hands-on Activity 3
+
+</span>
+
+<h2 class="fw-bold mt-3">
+
+Network Byte Ordering
+
+</h2>
+
+</div>
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+byteorder.c
+
+</div>
+
+<div class="card-body">
+
+<pre class="bg-dark text-light p-4 rounded">
+
+#include &lt;stdio.h&gt;
+
+#include &lt;arpa/inet.h&gt;
+
+int main()
+
+{
+
+unsigned short port=8080;
+
+printf("Original : %u\n",port);
+
+printf("Network : %u\n",
+
+htons(port));
+
+printf("Back : %u\n",
+
+ntohs(htons(port)));
+
+}
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+Expected Output
+
+</div>
+
+<div class="card-body bg-dark text-success">
+
+<pre>
+
+Original : 8080
+
+Network : xxxx
+
+Back : 8080
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== MINI EXPERIMENT ===================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2 class="fw-bold">
+
+Mini Experiment
+
+</h2>
+
+</div>
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Experiment</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Change Port</td>
+
+<td>8080 → 5000</td>
+
+</tr>
+
+<tr>
+
+<td>Change Port</td>
+
+<td>5000 → 80</td>
+
+</tr>
+
+<tr>
+
+<td>Change IP</td>
+
+<td>127.0.0.1 → 192.168.1.5</td>
+
+</tr>
+
+<tr>
+
+<td>Change IP</td>
+
+<td>192.168.1.5 → 8.8.8.8</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== CHALLENGE ===================== -->
+
+<section class="bg-primary text-white py-5">
+
+<div class="container">
+
+<div class="text-center">
+
+<h2>
+
+Challenge Activity
+
+</h2>
+
+<p>
+
+Write a program that asks the user to enter
+
+an IP Address and a Port Number,
+
+stores them in
+
+<b>sockaddr_in</b>
+
+and prints
+
+the entered values.
+
+</p>
+
+<a href="#"
+
+class="btn btn-light btn-lg">
+
+Start Challenge
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== CHECKLIST ===================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2>
+
+Self Assessment
+
+</h2>
+
+</div>
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<div class="form-check">
+
+<input class="form-check-input"
+
+type="checkbox">
+
+<label class="form-check-label">
+
+Created sockaddr_in
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input"
+
+type="checkbox">
+
+<label class="form-check-label">
+
+Used inet_pton()
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input"
+
+type="checkbox">
+
+<label class="form-check-label">
+
+Used inet_ntop()
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input"
+
+type="checkbox">
+
+<label class="form-check-label">
+
+Used htons()
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input"
+
+type="checkbox">
+
+<label class="form-check-label">
+
+Compiled Successfully
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input"
+
+type="checkbox">
+
+<label class="form-check-label">
+
+Ready for TCP Client Programming
+
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
 </body>
 </html>
