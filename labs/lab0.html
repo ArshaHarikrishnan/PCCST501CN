@@ -593,14 +593,520 @@ VS Code / Gedit
 
 </section>
 
-<!-- Next sections continue in Part 2 -->
+<!-- ===================== INTRODUCTION ===================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<section class="py-5 bg-light">
 
-<script>
-AOS.init();
-</script>
+<div class="container">
+
+<div class="text-center mb-5">
+
+<span class="badge bg-primary">
+
+Theory
+
+</span>
+
+<h2 class="fw-bold mt-3">
+
+What is Socket Programming?
+
+</h2>
+
+<p class="lead">
+
+Socket Programming enables two applications running on different computers
+(or the same computer) to communicate over a network.
+
+</p>
+
+</div>
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<div class="card shadow h-100">
+
+<div class="card-body">
+
+<h4>
+
+<i class="fas fa-plug text-primary"></i>
+
+What is a Socket?
+
+</h4>
+
+<p>
+
+A socket is an endpoint of communication between two processes.
+Sockets allow applications to exchange data over TCP/IP or UDP.
+
+</p>
+
+<p>
+
+Examples include:
+
+</p>
+
+<ul>
+
+<li>Web Browsers</li>
+
+<li>Web Servers</li>
+
+<li>Email Clients</li>
+
+<li>FTP Applications</li>
+
+<li>Online Games</li>
+
+<li>Video Conferencing</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="card shadow h-100">
+
+<div class="card-body">
+
+<h4>
+
+<i class="fas fa-network-wired text-success"></i>
+
+Client–Server Communication
+
+</h4>
+
+<pre class="bg-dark text-light p-3 rounded">
+
++-------------+
+
+|   CLIENT    |
+
++-------------+
+
+|
+
+| TCP/IP
+
+|
+
++-------------+
+
+|   SERVER    |
+
++-------------+
+
+</pre>
+
+<p>
+
+The client sends requests.
+
+The server receives requests and sends responses.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== SOCKET ADDRESS ===================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2 class="fw-bold">
+
+Socket Address Structure
+
+</h2>
+
+<p>
+
+The socket address stores the IP address and Port Number.
+
+</p>
+
+</div>
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<pre class="bg-dark text-success p-4 rounded">
+
+struct sockaddr_in
+
+{
+
+sin_family
+
+sin_port
+
+sin_addr
+
+sin_zero
+
+};
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Field</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>sin_family</td>
+
+<td>Address Family (AF_INET)</td>
+
+</tr>
+
+<tr>
+
+<td>sin_port</td>
+
+<td>TCP/UDP Port Number</td>
+
+</tr>
+
+<tr>
+
+<td>sin_addr</td>
+
+<td>IPv4 Address</td>
+
+</tr>
+
+<tr>
+
+<td>sin_zero</td>
+
+<td>Unused Padding Bytes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== SOFTWARE CHECK ===================== -->
+
+<section class="bg-light py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2>
+
+Linux Environment Setup
+
+</h2>
+
+</div>
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+Ubuntu Terminal
+
+</div>
+
+<div class="card-body bg-dark text-success">
+
+<pre>
+
+mkdir SocketLab
+
+cd SocketLab
+
+gcc --version
+
+uname -a
+
+</pre>
+
+</div>
+
+</div>
+
+<div class="alert alert-success mt-4">
+
+<strong>Expected Outcome</strong>
+
+<ul>
+
+<li>GCC Compiler Installed</li>
+
+<li>Ubuntu Version Displayed</li>
+
+<li>Workspace Created Successfully</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== ACTIVITY 1 ===================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<span class="badge bg-success">
+
+Hands-on Activity 1
+
+</span>
+
+<h2 class="fw-bold mt-3">
+
+Create Your First Socket Address Structure
+
+</h2>
+
+</div>
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+socket_intro.c
+
+</div>
+
+<div class="card-body">
+
+<pre class="bg-dark text-light p-4 rounded">
+
+#include &lt;stdio.h&gt;
+
+#include &lt;string.h&gt;
+
+#include &lt;arpa/inet.h&gt;
+
+int main()
+
+{
+
+struct sockaddr_in server;
+
+memset(&server,0,sizeof(server));
+
+server.sin_family=AF_INET;
+
+server.sin_port=htons(8080);
+
+inet_pton(AF_INET,
+
+"127.0.0.1",
+
+&server.sin_addr);
+
+printf("Family : %d\n",
+
+server.sin_family);
+
+printf("Port : %d\n",
+
+ntohs(server.sin_port));
+
+return 0;
+
+}
+
+</pre>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-lg-6">
+
+<div class="card border-success">
+
+<div class="card-header bg-success text-white">
+
+Compile
+
+</div>
+
+<div class="card-body bg-dark text-success">
+
+<pre>
+
+gcc socket_intro.c -o socket_intro
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="card border-primary">
+
+<div class="card-header bg-primary text-white">
+
+Run
+
+</div>
+
+<div class="card-body bg-dark text-success">
+
+<pre>
+
+./socket_intro
+
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="alert alert-info mt-4">
+
+<h5>
+
+Expected Output
+
+</h5>
+
+<pre>
+
+Family : 2
+
+Port : 8080
+
+</pre>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== DID YOU KNOW ===================== -->
+
+<section class="bg-primary text-white py-5">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-6">
+
+<h3>
+
+💡 Did You Know?
+
+</h3>
+
+<p>
+
+Almost every TCP or UDP program starts by creating
+a <strong>sockaddr_in</strong> structure.
+
+</p>
+
+</div>
+
+<div class="col-lg-6">
+
+<h3>
+
+⚠ Common Mistake
+
+</h3>
+
+<p>
+
+Students often forget to use
+
+<strong>htons()</strong>
+
+when assigning the port number.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
 
 </body>
 </html>
