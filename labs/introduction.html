@@ -121,6 +121,16 @@ margin:4px;
 
 </style>
 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<style>
+.progress-bar-top{position:fixed;top:0;left:0;height:4px;background:#ffc107;width:0;z-index:2000}
+.floating-btn{position:fixed;right:20px;z-index:1500}
+#backTop{bottom:90px}
+#nextLab{bottom:25px}
+.learning-path .step{border-left:4px solid #0d6efd;padding:.75rem 1rem;margin:.5rem 0;background:#fff;border-radius:8px}
+</style>
+
 </head>
 
 <body>
@@ -2640,11 +2650,11 @@ Proceed to the first laboratory experiment.
 
 </p>
 
-<a href="lab1.html"
+<a href="lab5.html"
 
 class="btn btn-success btn-lg">
 
-🚀 Start Lab 1
+🚀 Start Socket Programming
 
 </a>
 
@@ -2687,6 +2697,21 @@ Developed by
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<div class="progress-bar-top" id="progressBar"></div>
+<a id="backTop" class="btn btn-primary floating-btn rounded-circle" href="#top"><i class="fas fa-arrow-up"></i></a>
+<a id="nextLab" class="btn btn-success floating-btn" href="lab1.html">Next Lab →</a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script>
+document.body.id='top';
+window.addEventListener('scroll',function(){
+var h=document.documentElement;
+var p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+document.getElementById('progressBar').style.width=p+'%';
+});
+</script>
 
 </body>
 
