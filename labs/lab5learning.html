@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Socket Programming Learning Module
+
+</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:#f5f7fb;
+
+color:#263238;
+
+line-height:1.8;
+
+}
+
+.navbar{
+
+background:#0b3c7a;
+
+}
+
+.hero{
+
+background:linear-gradient(135deg,#082f6b,#1976d2);
+
+color:white;
+
+padding:90px 0;
+
+}
+
+.hero h1{
+
+font-size:52px;
+
+font-weight:700;
+
+}
+
+.hero p{
+
+font-size:20px;
+
+}
+
+.section-title{
+
+border-left:6px solid #1976d2;
+
+padding-left:14px;
+
+margin-top:60px;
+
+margin-bottom:25px;
+
+font-weight:bold;
+
+}
+
+.card{
+
+border:none;
+
+border-radius:18px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.api-card{
+
+padding:20px;
+
+text-align:center;
+
+height:100%;
+
+}
+
+.flow{
+
+background:#111827;
+
+color:#7CFC00;
+
+padding:20px;
+
+border-radius:12px;
+
+font-family:Consolas;
+
+overflow:auto;
+
+}
+
+footer{
+
+background:#082f6b;
+
+color:white;
+
+padding:25px;
+
+margin-top:60px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+<div class="container">
+
+<a class="navbar-brand fw-bold"
+
+href="../networklab.html">
+
+PCCSL507
+
+</a>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div class="container text-center">
+
+<h1>
+
+<i class="fas fa-network-wired"></i>
+
+Socket Programming
+
+Learning Module
+
+</h1>
+
+<p class="mt-4">
+
+Everything you need before writing TCP Socket Programs
+
+</p>
+
+<a href="#intro"
+
+class="btn btn-warning btn-lg mt-3">
+
+Start Learning
+
+</a>
+
+</div>
+
+</section>
+
+<main class="container py-5">
+
+<h2
+
+id="intro"
+
+class="section-title">
+
+🎯 Learning Outcomes
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="card api-card">
+
+<i class="fas fa-plug fa-3x text-primary"></i>
+
+<h5 class="mt-3">
+
+Socket Basics
+
+</h5>
+
+<p>
+
+Understand communication endpoints.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card api-card">
+
+<i class="fas fa-server fa-3x text-success"></i>
+
+<h5 class="mt-3">
+
+Client Server
+
+</h5>
+
+<p>
+
+Learn how computers communicate.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card api-card">
+
+<i class="fas fa-code fa-3x text-danger"></i>
+
+<h5 class="mt-3">
+
+Socket APIs
+
+</h5>
+
+<p>
+
+Study socket(), bind(), connect() and more.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card api-card">
+
+<i class="fas fa-laptop-code fa-3x text-warning"></i>
+
+<h5 class="mt-3">
+
+Programming
+
+</h5>
+
+<p>
+
+Prepare for today's experiment.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">
+
+🌍 Why Learn Socket Programming?
+
+</h2>
+
+<div class="card p-4">
+
+<p>
+
+Imagine you open WhatsApp.
+
+You type
+
+<strong>Hello</strong>
+
+and press Send.
+
+Within a fraction of a second,
+
+your message reaches a server on the Internet,
+
+which processes it and forwards it to your friend's phone.
+
+</p>
+
+<p>
+
+The same principle is used when you
+
+browse websites,
+
+send emails,
+
+watch YouTube,
+
+join Google Meet,
+
+or upload files to Google Drive.
+
+</p>
+
+<p>
+
+Behind every one of these applications is
+
+<strong>network programming</strong>.
+
+Applications communicate through
+
+<strong>sockets</strong>,
+
+which act as communication endpoints.
+
+</p>
+
+</div>
+
+<h2 class="section-title">
+
+🌐 Real World Communication
+
+</h2>
+
+<div class="flow">
+
+YOU
+
+↓
+
+WhatsApp Application
+
+↓
+
+Socket
+
+↓
+
+Internet
+
+↓
+
+Socket
+
+↓
+
+WhatsApp Server
+
+↓
+
+Socket
+
+↓
+
+Friend's Phone
+
+</div>
+
+<h2 class="section-title">
+
+What is Network Programming?
+
+</h2>
+
+<div class="card p-4">
+
+<p>
+
+Network programming is the process of developing software that enables two or more applications running on different computers to exchange information over a network.
+
+Instead of operating only within one computer,
+
+these applications communicate through networking protocols such as TCP and UDP.
+
+</p>
+
+<p>
+
+Examples include:
+
+</p>
+
+<ul>
+
+<li>Web Browsers</li>
+
+<li>Email Clients</li>
+
+<li>Online Banking</li>
+
+<li>Video Streaming</li>
+
+<li>Cloud Storage</li>
+
+<li>Online Games</li>
+
+</ul>
+
+</div>
+
+<h2 class="section-title">
+
+💡 Key Idea
+
+</h2>
+
+<div class="alert alert-primary">
+
+<b>
+
+A socket is simply an endpoint of communication between two applications.
+
+</b>
+
+</div>
+<!-- ===================================================== -->
+<!-- CLIENT SERVER ARCHITECTURE -->
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🖥 Client–Server Architecture
+
+</h2>
+
+<div class="card p-4">
+
+<p>
+
+Most network applications follow the <strong>client–server model</strong>.
+A <strong>client</strong> is the application that requests a service,
+while the <strong>server</strong> provides that service.
+
+</p>
+
+<p>
+
+Examples include:
+
+</p>
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Client</th>
+
+<th>Server</th>
+
+<th>Service</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Google Chrome</td>
+
+<td>Web Server</td>
+
+<td>Web Pages</td>
+
+</tr>
+
+<tr>
+
+<td>Outlook</td>
+
+<td>Mail Server</td>
+
+<td>Email</td>
+
+</tr>
+
+<tr>
+
+<td>WhatsApp</td>
+
+<td>WhatsApp Server</td>
+
+<td>Messaging</td>
+
+</tr>
+
+<tr>
+
+<td>FTP Client</td>
+
+<td>FTP Server</td>
+
+<td>File Transfer</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🔄 Client–Server Communication Flow
+
+</h2>
+
+<div class="flow">
+
+CLIENT
+
+|
+
+| socket()
+
+|
+
+| connect()
+
+|
+
+|------------ REQUEST ------------>
+
+|
+
+|
+
+SERVER
+
+|
+
+socket()
+
+↓
+
+bind()
+
+↓
+
+listen()
+
+↓
+
+accept()
+
+↓
+
+Process Request
+
+↓
+
+send()
+
+|
+
+<----------- RESPONSE ------------
+
+|
+
+recv()
+
+↓
+
+Display Result
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🔌 What is a Socket?
+
+</h2>
+
+<div class="card p-4">
+
+<p>
+
+A <strong>socket</strong> is a communication endpoint used by two
+applications to exchange data over a network.
+
+</p>
+
+<p>
+
+Think of a socket as a telephone.
+
+A telephone allows two people to communicate.
+
+Similarly,
+
+a socket allows two programs running on different computers
+(or on the same computer) to communicate.
+
+</p>
+
+<div class="alert alert-success">
+
+<b>Simple Definition</b>
+
+<br><br>
+
+A socket is an endpoint through which a process sends or receives
+network data.
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+☎ Real World Analogy
+
+</h2>
+
+<div class="card p-4">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<h4>
+
+Telephone Communication
+
+</h4>
+
+<ul>
+
+<li>Person A dials a number</li>
+
+<li>Telephone network connects both people</li>
+
+<li>Conversation begins</li>
+
+<li>Call ends</li>
+
+</ul>
+
+</div>
+
+<div class="col-md-6">
+
+<h4>
+
+Socket Communication
+
+</h4>
+
+<ul>
+
+<li>Client creates a socket</li>
+
+<li>Server accepts connection</li>
+
+<li>Data is exchanged</li>
+
+<li>Connection closes</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+⚙ Socket Programming Workflow
+
+</h2>
+
+<div class="flow">
+
+SERVER
+
+-------
+
+socket()
+
+↓
+
+bind()
+
+↓
+
+listen()
+
+↓
+
+accept()
+
+↓
+
+recv()
+
+↓
+
+send()
+
+↓
+
+close()
+
+
+
+CLIENT
+
+-------
+
+socket()
+
+↓
+
+connect()
+
+↓
+
+send()
+
+↓
+
+recv()
+
+↓
+
+close()
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+📦 TCP vs UDP
+
+</h2>
+
+<div class="table-responsive">
+
+<table class="table table-striped table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Feature</th>
+
+<th>TCP</th>
+
+<th>UDP</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Connection</td>
+
+<td>Connection-Oriented</td>
+
+<td>Connectionless</td>
+
+</tr>
+
+<tr>
+
+<td>Reliability</td>
+
+<td>Reliable</td>
+
+<td>Best Effort</td>
+
+</tr>
+
+<tr>
+
+<td>Ordering</td>
+
+<td>Guaranteed</td>
+
+<td>Not Guaranteed</td>
+
+</tr>
+
+<tr>
+
+<td>Speed</td>
+
+<td>Slower</td>
+
+<td>Faster</td>
+
+</tr>
+
+<tr>
+
+<td>Error Recovery</td>
+
+<td>Yes</td>
+
+<td>No</td>
+
+</tr>
+
+<tr>
+
+<td>Examples</td>
+
+<td>HTTP, HTTPS, FTP, SMTP</td>
+
+<td>DNS, VoIP, Video Streaming</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🎯 Why Does Today's Lab Use TCP?
+
+</h2>
+
+<div class="card p-4">
+
+<p>
+
+In today's experiment,
+
+the client sends an entire matrix to the server.
+
+If even one element of the matrix is lost,
+
+the server cannot correctly determine the matrix type.
+
+Therefore,
+
+TCP is preferred because it provides:
+
+</p>
+
+<ul>
+
+<li>Reliable delivery</li>
+
+<li>Error checking</li>
+
+<li>Correct packet ordering</li>
+
+<li>Automatic retransmission</li>
+
+</ul>
+
+<div class="alert alert-warning">
+
+<b>Remember</b>
+
+<br><br>
+
+For programming assignments that require every byte of data to
+reach the server correctly,
+
+<strong>TCP is usually the preferred transport protocol.</strong>
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+📝 Quick Revision
+
+</h2>
+
+<div class="card p-4">
+
+<ul>
+
+<li>A client requests services.</li>
+
+<li>A server provides services.</li>
+
+<li>A socket is the endpoint of communication.</li>
+
+<li>TCP is reliable.</li>
+
+<li>UDP is faster but unreliable.</li>
+
+<li>Client and server communicate through sockets.</li>
+
+</ul>
+
+</div>
+<!-- ===================================================== -->
+<!-- SOCKET PROGRAMMING API -->
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+💻 Socket Programming APIs
+
+</h2>
+
+<div class="card p-4">
+
+<p>
+
+A socket program is built by calling a sequence of networking
+functions provided by the operating system.
+
+Every TCP client and server uses these functions to establish
+communication, exchange data and terminate the connection safely.
+
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+① socket()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Creates a communication endpoint.
+
+This is always the first function used in socket programming.
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+int socket(int domain,
+           int type,
+           int protocol);
+</pre>
+
+<h4>Parameters</h4>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Parameter</th>
+
+<th>Description</th>
+
+</tr>
+
+<tr>
+
+<td>domain</td>
+
+<td>Address family (AF_INET)</td>
+
+</tr>
+
+<tr>
+
+<td>type</td>
+
+<td>SOCK_STREAM for TCP</td>
+
+</tr>
+
+<tr>
+
+<td>protocol</td>
+
+<td>Normally 0</td>
+
+</tr>
+
+</table>
+
+<div class="alert alert-info">
+
+Returns a socket descriptor.
+
+Returns <b>-1</b> if creation fails.
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+② bind()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Associates the socket with an IP address and a port number.
+
+Only servers normally call bind().
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+bind(sockfd,
+     (struct sockaddr *)&server,
+     sizeof(server));
+</pre>
+
+<div class="alert alert-warning">
+
+Think of bind() as assigning an address to your house.
+
+Without an address,
+
+clients cannot find the server.
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+③ listen()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Places the server socket into listening mode.
+
+The server waits for connection requests from clients.
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+listen(sockfd,5);
+</pre>
+
+<p>
+
+The second parameter specifies the maximum number of pending
+connections.
+
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+④ accept()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Accepts a connection request sent by a client.
+
+Once accepted,
+
+a new socket descriptor is returned for communication.
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+newsockfd =
+accept(sockfd,
+       NULL,
+       NULL);
+</pre>
+
+<div class="alert alert-success">
+
+The original socket keeps listening.
+
+The new socket communicates with one client.
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+⑤ connect()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Used by the client to establish a connection with the server.
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+connect(sockfd,
+        (struct sockaddr *)&server,
+        sizeof(server));
+</pre>
+
+<p>
+
+If the server is not running,
+
+connect() fails.
+
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+⑥ send()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Transfers data from the client to the server
+or from the server to the client.
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+send(sockfd,
+     buffer,
+     sizeof(buffer),
+     0);
+</pre>
+
+<p>
+
+Returns the number of bytes transmitted.
+
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+⑦ recv()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Receives incoming data from the connected socket.
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+recv(sockfd,
+     buffer,
+     sizeof(buffer),
+     0);
+</pre>
+
+<div class="alert alert-primary">
+
+recv() blocks until data arrives
+unless non-blocking mode is enabled.
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+⑧ close()
+
+</h2>
+
+<div class="card p-4">
+
+<h4>Purpose</h4>
+
+<p>
+
+Terminates the socket connection and releases system resources.
+
+</p>
+
+<h4>Syntax</h4>
+
+<pre class="flow">
+close(sockfd);
+</pre>
+
+<p>
+
+Always close sockets after communication finishes.
+
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+📊 Complete TCP Function Sequence
+
+</h2>
+
+<div class="flow">
+
+SERVER
+
+socket()
+
+↓
+
+bind()
+
+↓
+
+listen()
+
+↓
+
+accept()
+
+↓
+
+recv()
+
+↓
+
+process()
+
+↓
+
+send()
+
+↓
+
+close()
+
+
+
+CLIENT
+
+socket()
+
+↓
+
+connect()
+
+↓
+
+send()
+
+↓
+
+recv()
+
+↓
+
+close()
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🎯 API Summary
+
+</h2>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-striped">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Function</th>
+
+<th>Used By</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>socket()</td>
+
+<td>Client & Server</td>
+
+<td>Create socket</td>
+
+</tr>
+
+<tr>
+
+<td>bind()</td>
+
+<td>Server</td>
+
+<td>Assign IP and Port</td>
+
+</tr>
+
+<tr>
+
+<td>listen()</td>
+
+<td>Server</td>
+
+<td>Wait for clients</td>
+
+</tr>
+
+<tr>
+
+<td>accept()</td>
+
+<td>Server</td>
+
+<td>Accept connection</td>
+
+</tr>
+
+<tr>
+
+<td>connect()</td>
+
+<td>Client</td>
+
+<td>Connect to server</td>
+
+</tr>
+
+<tr>
+
+<td>send()</td>
+
+<td>Both</td>
+
+<td>Transmit data</td>
+
+</tr>
+
+<tr>
+
+<td>recv()</td>
+
+<td>Both</td>
+
+<td>Receive data</td>
+
+</tr>
+
+<tr>
+
+<td>close()</td>
+
+<td>Both</td>
+
+<td>Close socket</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="alert alert-danger">
+
+<b>Remember the order!</b>
+
+<br><br>
+
+Server:
+socket → bind → listen → accept → recv → send → close
+
+<br><br>
+
+Client:
+socket → connect → send → recv → close
+
+</div>
+<!-- ===================================================== -->
+<!-- LAB 5 IMPLEMENTATION -->
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🧪 Lab 5 - TCP Matrix Classifier
+
+</h2>
+
+<div class="card p-4">
+
+<p>
+
+In this experiment, a TCP client generates an <strong>N × N matrix</strong>
+containing random integers between <strong>1 and 50</strong>.
+The client establishes a TCP connection with the server and sends the matrix.
+
+The server receives the matrix, analyzes its structure,
+and determines whether it is:
+
+</p>
+
+<ul>
+
+<li>Diagonal Matrix</li>
+
+<li>Upper Triangular Matrix</li>
+
+<li>Lower Triangular Matrix</li>
+
+<li>None of the Above</li>
+
+</ul>
+
+<p>
+
+Finally, the server sends the result back to the client,
+which displays the classification.
+
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+📡 Complete Data Flow
+
+</h2>
+
+<div class="flow">
+
+CLIENT
+
+↓
+
+Read N
+
+↓
+
+Generate Random Matrix
+
+↓
+
+Display Matrix
+
+↓
+
+socket()
+
+↓
+
+connect()
+
+↓
+
+send(N)
+
+↓
+
+send(Matrix)
+
+===========================================
+
+SERVER
+
+↓
+
+socket()
+
+↓
+
+bind()
+
+↓
+
+listen()
+
+↓
+
+accept()
+
+↓
+
+recv(N)
+
+↓
+
+recv(Matrix)
+
+↓
+
+Analyze Matrix
+
+↓
+
+Create Result String
+
+↓
+
+send(Result)
+
+===========================================
+
+CLIENT
+
+↓
+
+recv(Result)
+
+↓
+
+Display Matrix Type
+
+↓
+
+close()
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+⚙ Server Algorithm
+
+</h2>
+
+<div class="card p-4">
+
+<ol>
+
+<li>Create TCP socket.</li>
+
+<li>Bind socket to server IP and port.</li>
+
+<li>Listen for incoming connections.</li>
+
+<li>Accept one client connection.</li>
+
+<li>Receive matrix order N.</li>
+
+<li>Receive all matrix elements.</li>
+
+<li>Check the matrix type.</li>
+
+<li>Send the matrix type back to the client.</li>
+
+<li>Close the connection.</li>
+
+</ol>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+💻 Client Algorithm
+
+</h2>
+
+<div class="card p-4">
+
+<ol>
+
+<li>Create TCP socket.</li>
+
+<li>Connect to the server.</li>
+
+<li>Read matrix order N.</li>
+
+<li>Generate random matrix values.</li>
+
+<li>Display the matrix.</li>
+
+<li>Send N to the server.</li>
+
+<li>Send the matrix.</li>
+
+<li>Receive the classification string.</li>
+
+<li>Display the result.</li>
+
+<li>Close the socket.</li>
+
+</ol>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🛠 Compilation Commands
+
+</h2>
+
+<div class="flow">
+
+gcc server.c -o server
+
+gcc client.c -o client
+
+</div>
+
+<h4 class="mt-4">
+
+Run Server
+
+</h4>
+
+<div class="flow">
+
+./server
+
+</div>
+
+<h4 class="mt-4">
+
+Run Client
+
+</h4>
+
+<div class="flow">
+
+./client
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+📌 Sample Execution
+
+</h2>
+
+<div class="card p-4">
+
+<pre>
+
+Enter Matrix Order : 3
+
+Generated Matrix
+
+12 14 22
+
+18 45 11
+
+29 13 40
+
+Connecting to Server...
+
+Matrix Sent Successfully...
+
+Waiting for Response...
+
+Server Response :
+
+OTHER MATRIX
+
+</pre>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🚨 Common Programming Errors
+
+</h2>
+
+<div class="table-responsive">
+
+<table class="table table-bordered">
+
+<thead class="table-danger">
+
+<tr>
+
+<th>Error</th>
+
+<th>Possible Reason</th>
+
+<th>Solution</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Connection Refused</td>
+
+<td>Server not running</td>
+
+<td>Start the server first.</td>
+
+</tr>
+
+<tr>
+
+<td>Bind Failed</td>
+
+<td>Port already in use</td>
+
+<td>Choose another port or terminate the previous server.</td>
+
+</tr>
+
+<tr>
+
+<td>recv() returns 0</td>
+
+<td>Client disconnected</td>
+
+<td>Reconnect the client.</td>
+
+</tr>
+
+<tr>
+
+<td>Socket Creation Failed</td>
+
+<td>System resource issue</td>
+
+<td>Check the return value of socket().</td>
+
+</tr>
+
+<tr>
+
+<td>No Response</td>
+
+<td>Client and server use different port numbers</td>
+
+<td>Verify the port number in both programs.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+📋 Programming Checklist
+
+</h2>
+
+<div class="card p-4">
+
+<div class="form-check">
+
+<input class="form-check-input" type="checkbox">
+
+<label class="form-check-label">
+
+Server compiled successfully.
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input" type="checkbox">
+
+<label class="form-check-label">
+
+Client compiled successfully.
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input" type="checkbox">
+
+<label class="form-check-label">
+
+Server started before client.
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input" type="checkbox">
+
+<label class="form-check-label">
+
+Matrix transmitted correctly.
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input" type="checkbox">
+
+<label class="form-check-label">
+
+Classification received successfully.
+
+</label>
+
+</div>
+
+<div class="form-check">
+
+<input class="form-check-input" type="checkbox">
+
+<label class="form-check-label">
+
+Program tested with multiple matrices.
+
+</label>
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+
+🎯 Programming Tips
+
+</h2>
+
+<div class="alert alert-info">
+
+<ul class="mb-0">
+
+<li>Always check the return value of <code>socket()</code>, <code>bind()</code>, <code>connect()</code>, and <code>accept()</code>.</li>
+
+<li>Use the same port number in both the client and the server.</li>
+
+<li>Start the server before running the client.</li>
+
+<li>Close every socket after communication is complete.</li>
+
+<li>Display meaningful error messages using <code>perror()</code>.</li>
+
+<li>Test your program with different matrix sizes.</li>
+
+</ul>
+
+</div>
+<!-- ===================================================== -->
+<!-- VIVA QUESTIONS -->
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+🎓 Viva Questions
+</h2>
+
+<div class="card p-4">
+
+<ol>
+
+<li>What is network programming?</li>
+
+<li>What is a socket?</li>
+
+<li>Why is a socket called a communication endpoint?</li>
+
+<li>Differentiate between TCP and UDP.</li>
+
+<li>Why is TCP used in this experiment?</li>
+
+<li>What is the purpose of socket()?</li>
+
+<li>What is the purpose of bind()?</li>
+
+<li>Why is listen() required only on the server?</li>
+
+<li>What does accept() return?</li>
+
+<li>Why does the client call connect()?</li>
+
+<li>Differentiate between send() and recv().</li>
+
+<li>Why should every socket be closed?</li>
+
+<li>What is a port number?</li>
+
+<li>Can two servers use the same port simultaneously?</li>
+
+<li>What happens if the server is not running?</li>
+
+<li>Why is the matrix order N transmitted first?</li>
+
+<li>How does the server identify a diagonal matrix?</li>
+
+<li>How can multiple clients communicate with one server?</li>
+
+<li>What is a socket descriptor?</li>
+
+<li>Which API actually creates the communication endpoint?</li>
+
+</ol>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- SELF ASSESSMENT -->
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+📝 Self Assessment
+</h2>
+
+<div class="card p-4">
+
+<div class="accordion" id="quiz">
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#q1">
+1. Which function creates a socket?
+</button>
+</h2>
+<div id="q1" class="accordion-collapse collapse show">
+<div class="accordion-body">
+<b>Answer:</b> socket()
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">
+2. Which function waits for client connections?
+</button>
+</h2>
+<div id="q2" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> listen()
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q3">
+3. Which function establishes a TCP connection from the client?
+</button>
+</h2>
+<div id="q3" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> connect()
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q4">
+4. Which function receives incoming data?
+</button>
+</h2>
+<div id="q4" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> recv()
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q5">
+5. Which function sends data?
+</button>
+</h2>
+<div id="q5" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> send()
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q6">
+6. Which transport protocol is used in this experiment?
+</button>
+</h2>
+<div id="q6" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> TCP
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q7">
+7. Which function assigns an IP address and port?
+</button>
+</h2>
+<div id="q7" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> bind()
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q8">
+8. Which function accepts a client connection?
+</button>
+</h2>
+<div id="q8" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> accept()
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q9">
+9. What is returned by socket() if it fails?
+</button>
+</h2>
+<div id="q9" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> -1
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q10">
+10. Which function releases the socket resources?
+</button>
+</h2>
+<div id="q10" class="accordion-collapse collapse">
+<div class="accordion-body">
+<b>Answer:</b> close()
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- QUICK REVISION -->
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+📚 Quick Revision Sheet
+</h2>
+
+<div class="card p-4">
+
+<table class="table table-bordered">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Concept</th>
+
+<th>Remember</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>Socket</td>
+<td>Communication endpoint</td>
+</tr>
+
+<tr>
+<td>Client</td>
+<td>Requests services</td>
+</tr>
+
+<tr>
+<td>Server</td>
+<td>Provides services</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>Reliable communication</td>
+</tr>
+
+<tr>
+<td>UDP</td>
+<td>Fast but unreliable</td>
+</tr>
+
+<tr>
+<td>socket()</td>
+<td>Create socket</td>
+</tr>
+
+<tr>
+<td>bind()</td>
+<td>Assign IP and Port</td>
+</tr>
+
+<tr>
+<td>listen()</td>
+<td>Wait for connections</td>
+</tr>
+
+<tr>
+<td>accept()</td>
+<td>Accept client</td>
+</tr>
+
+<tr>
+<td>connect()</td>
+<td>Connect to server</td>
+</tr>
+
+<tr>
+<td>send()</td>
+<td>Transmit data</td>
+</tr>
+
+<tr>
+<td>recv()</td>
+<td>Receive data</td>
+</tr>
+
+<tr>
+<td>close()</td>
+<td>Release resources</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- READY FOR LAB -->
+<!-- ===================================================== -->
+
+<h2 class="section-title">
+🏁 Ready for Today's Lab?
+</h2>
+
+<div class="alert alert-success p-4">
+
+<h4>
+Congratulations! 🎉
+</h4>
+
+<p>
+
+You are now ready to implement the TCP Matrix Classifier experiment.
+
+Before you start coding, ensure that you can answer the following:
+
+</p>
+
+<ul>
+
+<li>✔ What is a socket?</li>
+
+<li>✔ Difference between Client and Server?</li>
+
+<li>✔ Difference between TCP and UDP?</li>
+
+<li>✔ Order of socket API calls?</li>
+
+<li>✔ Compilation commands?</li>
+
+<li>✔ Why TCP is used in this experiment?</li>
+
+</ul>
+
+<p class="mb-0">
+
+If you can answer these confidently, you are ready to begin coding.
+
+Good luck! 🚀
+
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- NAVIGATION -->
+<!-- ===================================================== -->
+
+<div class="d-flex justify-content-between mt-5">
+
+<a href="lab5.html" class="btn btn-outline-primary btn-lg">
+
+← Back to Experiment
+
+</a>
+
+<a href="../networklab.html" class="btn btn-success btn-lg">
+
+🏠 Network Lab Home
+
+</a>
+
+</div>
+
+</main>
+
+<footer class="text-center">
+
+<h5>PCCSL507 Computer Networks Laboratory</h5>
+
+<p>
+
+Socket Programming Learning Module
+
+</p>
+
+<p>
+
+Developed by <strong>Ms. Arsha J K</strong>
+
+</p>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
