@@ -359,37 +359,87 @@ which act as communication endpoints.
 
 </h2>
 
-<div class="flow">
+<div class="card p-4 shadow-sm">
 
-YOU
+<div class="text-center">
 
-↓
+<div class="border rounded p-3 bg-primary text-white mx-auto mb-2" style="max-width:350px;">
+<i class="fas fa-user fa-2x mb-2"></i>
+<h5 class="mb-0">YOU</h5>
+<small>Type a message</small>
+</div>
 
-WhatsApp Application
+<div class="fs-2 text-primary">
+<i class="fas fa-arrow-down"></i>
+</div>
 
-↓
+<div class="border rounded p-3 bg-success text-white mx-auto mb-2" style="max-width:350px;">
+<i class="fab fa-whatsapp fa-2x mb-2"></i>
+<h5 class="mb-0">WhatsApp Application</h5>
+<small>Creates the message</small>
+</div>
 
-Socket
+<div class="fs-2 text-success">
+<i class="fas fa-arrow-down"></i>
+</div>
 
-↓
+<div class="border rounded p-3 bg-info text-white mx-auto mb-2" style="max-width:350px;">
+<i class="fas fa-plug fa-2x mb-2"></i>
+<h5 class="mb-0">Socket</h5>
+<small>Communication Endpoint</small>
+</div>
 
-Internet
+<div class="fs-2 text-info">
+<i class="fas fa-arrow-down"></i>
+</div>
 
-↓
+<div class="border rounded p-3 bg-warning text-dark mx-auto mb-2" style="max-width:350px;">
+<i class="fas fa-globe fa-2x mb-2"></i>
+<h5 class="mb-0">Internet</h5>
+<small>Transfers the message</small>
+</div>
 
-Socket
+<div class="fs-2 text-warning">
+<i class="fas fa-arrow-down"></i>
+</div>
 
-↓
+<div class="border rounded p-3 bg-info text-white mx-auto mb-2" style="max-width:350px;">
+<i class="fas fa-plug fa-2x mb-2"></i>
+<h5 class="mb-0">Socket</h5>
+<small>Server Communication Endpoint</small>
+</div>
 
-WhatsApp Server
+<div class="fs-2 text-info">
+<i class="fas fa-arrow-down"></i>
+</div>
 
-↓
+<div class="border rounded p-3 bg-success text-white mx-auto mb-2" style="max-width:350px;">
+<i class="fas fa-server fa-2x mb-2"></i>
+<h5 class="mb-0">WhatsApp Server</h5>
+<small>Processes the message</small>
+</div>
 
-Socket
+<div class="fs-2 text-success">
+<i class="fas fa-arrow-down"></i>
+</div>
 
-↓
+<div class="border rounded p-3 bg-info text-white mx-auto mb-2" style="max-width:350px;">
+<i class="fas fa-plug fa-2x mb-2"></i>
+<h5 class="mb-0">Socket</h5>
+<small>Sends to Destination</small>
+</div>
 
-Friend's Phone
+<div class="fs-2 text-info">
+<i class="fas fa-arrow-down"></i>
+</div>
+
+<div class="border rounded p-3 bg-primary text-white mx-auto" style="max-width:350px;">
+<i class="fas fa-mobile-alt fa-2x mb-2"></i>
+<h5 class="mb-0">Friend's Phone</h5>
+<small>Message Delivered</small>
+</div>
+
+</div>
 
 </div>
 
@@ -548,63 +598,110 @@ Examples include:
 
 </h2>
 
-<div class="flow">
+<h2 class="section-title">
+<i class="fas fa-exchange-alt text-primary me-2"></i>
+Client–Server Communication Flow
+</h2>
 
-CLIENT
+<div class="card p-5 shadow-sm">
 
-|
+<div class="row">
 
-| socket()
+<!-- CLIENT -->
 
-|
+<div class="col-md-5">
 
-| connect()
+<div class="card border-primary">
 
-|
+<div class="card-header bg-primary text-white text-center fw-bold">
 
-|------------ REQUEST ------------>
+<i class="fas fa-user me-2"></i>CLIENT
 
-|
+</div>
 
-|
+<div class="card-body">
 
-SERVER
+<div class="alert alert-light border mb-2">① socket()</div>
 
-|
+<div class="alert alert-light border mb-2">② connect()</div>
 
-socket()
+<div class="alert alert-light border mb-2">③ Send Request</div>
 
-↓
+<div class="alert alert-light border mb-2">④ Wait for Response</div>
 
-bind()
+<div class="alert alert-light border mb-2">⑤ recv()</div>
 
-↓
+<div class="alert alert-light border mb-2">⑥ Display Result</div>
 
-listen()
+</div>
 
-↓
+</div>
 
-accept()
+</div>
 
-↓
+<!-- MIDDLE -->
 
-Process Request
+<div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
 
-↓
+<div class="text-primary fs-2">
 
-send()
+<i class="fas fa-arrow-right"></i>
 
-|
+</div>
 
-<----------- RESPONSE ------------
+<p class="fw-bold text-success my-3">
 
-|
+REQUEST
 
-recv()
+</p>
 
-↓
+<div class="text-danger fs-2">
 
-Display Result
+<i class="fas fa-arrow-left"></i>
+
+</div>
+
+<p class="fw-bold text-danger">
+
+RESPONSE
+
+</p>
+
+</div>
+
+<!-- SERVER -->
+
+<div class="col-md-5">
+
+<div class="card border-success">
+
+<div class="card-header bg-success text-white text-center fw-bold">
+
+<i class="fas fa-server me-2"></i>SERVER
+
+</div>
+
+<div class="card-body">
+
+<div class="alert alert-light border mb-2">① socket()</div>
+
+<div class="alert alert-light border mb-2">② bind()</div>
+
+<div class="alert alert-light border mb-2">③ listen()</div>
+
+<div class="alert alert-light border mb-2">④ accept()</div>
+
+<div class="alert alert-light border mb-2">⑤ Process Request</div>
+
+<div class="alert alert-light border mb-2">⑥ send()</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -719,61 +816,96 @@ Socket Communication
 
 </h2>
 
-<div class="flow">
+<h2 class="section-title">
+<i class="fas fa-project-diagram text-primary me-2"></i>
+Socket Programming Workflow
+</h2>
 
-SERVER
+<div class="card p-5 shadow-sm">
 
--------
+<div class="row">
 
-socket()
+<!-- SERVER -->
 
-↓
+<div class="col-md-6">
 
-bind()
+<div class="card border-success">
 
-↓
+<div class="card-header bg-success text-white text-center fw-bold">
+<i class="fas fa-server me-2"></i>SERVER WORKFLOW
+</div>
 
-listen()
+<div class="card-body text-center">
 
-↓
+<div class="alert alert-success">① socket()</div>
 
-accept()
+<i class="fas fa-arrow-down text-success mb-2"></i>
 
-↓
+<div class="alert alert-success">② bind()</div>
 
-recv()
+<i class="fas fa-arrow-down text-success mb-2"></i>
 
-↓
+<div class="alert alert-success">③ listen()</div>
 
-send()
+<i class="fas fa-arrow-down text-success mb-2"></i>
 
-↓
+<div class="alert alert-success">④ accept()</div>
 
-close()
+<i class="fas fa-arrow-down text-success mb-2"></i>
 
+<div class="alert alert-success">⑤ recv()</div>
 
+<i class="fas fa-arrow-down text-success mb-2"></i>
 
-CLIENT
+<div class="alert alert-success">⑥ send()</div>
 
--------
+<i class="fas fa-arrow-down text-success mb-2"></i>
 
-socket()
+<div class="alert alert-danger">⑦ close()</div>
 
-↓
+</div>
 
-connect()
+</div>
 
-↓
+</div>
 
-send()
+<!-- CLIENT -->
 
-↓
+<div class="col-md-6">
 
-recv()
+<div class="card border-primary">
 
-↓
+<div class="card-header bg-primary text-white text-center fw-bold">
+<i class="fas fa-user me-2"></i>CLIENT WORKFLOW
+</div>
 
-close()
+<div class="card-body text-center">
+
+<div class="alert alert-primary">① socket()</div>
+
+<i class="fas fa-arrow-down text-primary mb-2"></i>
+
+<div class="alert alert-primary">② connect()</div>
+
+<i class="fas fa-arrow-down text-primary mb-2"></i>
+
+<div class="alert alert-primary">③ send()</div>
+
+<i class="fas fa-arrow-down text-primary mb-2"></i>
+
+<div class="alert alert-primary">④ recv()</div>
+
+<i class="fas fa-arrow-down text-primary mb-2"></i>
+
+<div class="alert alert-danger">⑤ close()</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1315,64 +1447,132 @@ Always close sockets after communication finishes.
 
 </h2>
 
-<div class="flow">
+<h2 class="section-title">
+<i class="fas fa-project-diagram text-primary me-2"></i>
+Socket Programming Workflow
+</h2>
 
-SERVER
+<div class="card shadow-sm p-5">
 
-socket()
+<div class="row g-4">
 
-↓
+<!-- SERVER -->
 
-bind()
+<div class="col-lg-6">
 
-↓
+<div class="card border-success">
 
-listen()
+<div class="card-header bg-success text-white text-center fw-bold fs-5">
+<i class="fas fa-server me-2"></i>SERVER
+</div>
 
-↓
+<div class="card-body text-center">
 
-accept()
+<div class="badge bg-success rounded-pill fs-6 mb-2">START</div>
 
-↓
+<div class="my-2">
+<div class="border rounded p-2">① socket()</div>
+<i class="fas fa-arrow-down text-success my-2"></i>
+</div>
 
-recv()
+<div class="my-2">
+<div class="border rounded p-2">② bind()</div>
+<i class="fas fa-arrow-down text-success my-2"></i>
+</div>
 
-↓
+<div class="my-2">
+<div class="border rounded p-2">③ listen()</div>
+<i class="fas fa-arrow-down text-success my-2"></i>
+</div>
 
-process()
+<div class="my-2">
+<div class="border rounded p-2">④ accept()</div>
+<i class="fas fa-arrow-down text-success my-2"></i>
+</div>
 
-↓
+<div class="my-2">
+<div class="border rounded p-2">⑤ recv()</div>
+<i class="fas fa-arrow-down text-success my-2"></i>
+</div>
 
-send()
+<div class="my-2">
+<div class="border rounded p-2 bg-warning-subtle">⑥ Process Request</div>
+<i class="fas fa-arrow-down text-success my-2"></i>
+</div>
 
-↓
+<div class="my-2">
+<div class="border rounded p-2">⑦ send()</div>
+<i class="fas fa-arrow-down text-success my-2"></i>
+</div>
 
-close()
-
-
-
-CLIENT
-
-socket()
-
-↓
-
-connect()
-
-↓
-
-send()
-
-↓
-
-recv()
-
-↓
-
-close()
+<div class="my-2">
+<div class="border rounded p-2 bg-danger-subtle">⑧ close()</div>
+</div>
 
 </div>
 
+</div>
+
+</div>
+
+<!-- CLIENT -->
+
+<div class="col-lg-6">
+
+<div class="card border-primary">
+
+<div class="card-header bg-primary text-white text-center fw-bold fs-5">
+<i class="fas fa-user me-2"></i>CLIENT
+</div>
+
+<div class="card-body text-center">
+
+<div class="badge bg-primary rounded-pill fs-6 mb-2">START</div>
+
+<div class="my-2">
+<div class="border rounded p-2">① socket()</div>
+<i class="fas fa-arrow-down text-primary my-2"></i>
+</div>
+
+<div class="my-2">
+<div class="border rounded p-2">② connect()</div>
+<i class="fas fa-arrow-down text-primary my-2"></i>
+</div>
+
+<div class="my-2">
+<div class="border rounded p-2">③ send()</div>
+<i class="fas fa-arrow-down text-primary my-2"></i>
+</div>
+
+<div class="my-2">
+<div class="border rounded p-2">④ recv()</div>
+<i class="fas fa-arrow-down text-primary my-2"></i>
+</div>
+
+<div class="my-2">
+<div class="border rounded p-2 bg-danger-subtle">⑤ close()</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="alert alert-info mt-4">
+
+<strong>💡 Tip:</strong>
+
+The server must be started first. It waits for a connection using
+<strong>listen()</strong> and <strong>accept()</strong>.
+The client then connects using <strong>connect()</strong>, sends the request,
+receives the response, and finally closes the connection.
+
+</div>
+
+</div>
 <!-- ===================================================== -->
 
 <h2 class="section-title">
@@ -1554,96 +1754,154 @@ which displays the classification.
 
 </h2>
 
-<div class="flow">
+<h2 class="section-title">
+<i class="fas fa-sitemap text-primary me-2"></i>
+Complete Data Flow
+</h2>
 
-CLIENT
+<p class="mb-4">
+The following diagram illustrates the complete communication process between the client and server during the TCP Matrix Classifier experiment.
+</p>
 
-↓
+<div class="card shadow-sm p-5">
 
-Read N
+<div class="text-center">
 
-↓
+<!-- ================= CLIENT ================= -->
 
-Generate Random Matrix
+<div class="card border-primary mx-auto mb-3" style="max-width:450px;">
 
-↓
+<div class="card-header bg-primary text-white fw-bold">
+<i class="fas fa-user me-2"></i>CLIENT
+</div>
 
-Display Matrix
+<div class="list-group list-group-flush">
 
-↓
-
-socket()
-
-↓
-
-connect()
-
-↓
-
-send(N)
-
-↓
-
-send(Matrix)
-
-===========================================
-
-SERVER
-
-↓
-
-socket()
-
-↓
-
-bind()
-
-↓
-
-listen()
-
-↓
-
-accept()
-
-↓
-
-recv(N)
-
-↓
-
-recv(Matrix)
-
-↓
-
-Analyze Matrix
-
-↓
-
-Create Result String
-
-↓
-
-send(Result)
-
-===========================================
-
-CLIENT
-
-↓
-
-recv(Result)
-
-↓
-
-Display Matrix Type
-
-↓
-
-close()
+<div class="list-group-item">① Read Matrix Order (N)</div>
+<div class="list-group-item">② Generate Random Matrix</div>
+<div class="list-group-item">③ Display Matrix</div>
+<div class="list-group-item">④ socket()</div>
+<div class="list-group-item">⑤ connect()</div>
+<div class="list-group-item">⑥ send(N)</div>
+<div class="list-group-item">⑦ send(Matrix)</div>
 
 </div>
 
+</div>
+
+<div class="fs-1 text-primary my-2">
+<i class="fas fa-arrow-down"></i>
+</div>
+
+<div class="badge bg-info fs-6 px-4 py-2 mb-3">
+📡 Matrix Travels Through TCP Network
+</div>
+
+<div class="fs-1 text-primary my-2">
+<i class="fas fa-arrow-down"></i>
+</div>
+
+<!-- ================= SERVER ================= -->
+
+<div class="card border-success mx-auto mb-3" style="max-width:450px;">
+
+<div class="card-header bg-success text-white fw-bold">
+<i class="fas fa-server me-2"></i>SERVER
+</div>
+
+<div class="list-group list-group-flush">
+
+<div class="list-group-item">① socket()</div>
+
+<div class="list-group-item">② bind()</div>
+
+<div class="list-group-item">③ listen()</div>
+
+<div class="list-group-item">④ accept()</div>
+
+<div class="list-group-item">⑤ recv(N)</div>
+
+<div class="list-group-item">⑥ recv(Matrix)</div>
+
+<div class="list-group-item bg-warning-subtle">
+⑦ Analyze Matrix
+</div>
+
+<div class="list-group-item bg-warning-subtle">
+⑧ Create Result String
+</div>
+
+<div class="list-group-item">
+⑨ send(Result)
+</div>
+
+</div>
+
+</div>
+
+<div class="fs-1 text-success my-2">
+<i class="fas fa-arrow-down"></i>
+</div>
+
+<div class="badge bg-secondary fs-6 px-4 py-2 mb-3">
+📤 Result Sent Back to Client
+</div>
+
+<div class="fs-1 text-success my-2">
+<i class="fas fa-arrow-down"></i>
+</div>
+
+<!-- ================= CLIENT ================= -->
+
+<div class="card border-primary mx-auto" style="max-width:450px;">
+
+<div class="card-header bg-primary text-white fw-bold">
+<i class="fas fa-user me-2"></i>CLIENT
+</div>
+
+<div class="list-group list-group-flush">
+
+<div class="list-group-item">⑧ recv(Result)</div>
+
+<div class="list-group-item bg-success-subtle">
+⑨ Display Matrix Type
+</div>
+
+<div class="list-group-item bg-danger-subtle">
+⑩ close()
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="alert alert-info mt-4">
+
+<h5>
+💡 Understanding the Workflow
+</h5>
+
+<ul class="mb-0">
+
+<li>The client creates a random matrix and establishes a TCP connection.</li>
+
+<li>The server waits for incoming connections using <strong>listen()</strong> and <strong>accept()</strong>.</li>
+
+<li>The client sends the matrix order followed by the matrix elements.</li>
+
+<li>The server analyzes the received matrix and determines its type.</li>
+
+<li>The server sends the classification result back to the client.</li>
+
+<li>The client displays the matrix type and closes the connection.</li>
+
+</ul>
+
+</div>
 <!-- ===================================================== -->
 
 <h2 class="section-title">
