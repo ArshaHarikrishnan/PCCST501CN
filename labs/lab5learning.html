@@ -1836,44 +1836,218 @@ Close Socket
 </div>
 <h2 class="section-title">
 🖥 Simple TCP Server
+<h2 class="section-title">
+<i class="fas fa-server text-success me-2"></i>
+Complete TCP Server Program (server.c)
 </h2>
 
 <div class="card p-4">
 
-<pre><code>
-char buffer[100];
+<p>
+The following TCP server waits for a client connection, receives a message,
+prints it on the screen and sends back <b>"Hello Client"</b>.
+</p>
 
-recv(clientSocket, buffer, sizeof(buffer), 0);
+<pre><code class="language-c">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;sys/socket.h&gt;
 
-printf("Client says: %s\n", buffer);
+#define PORT 8080
 
-send(clientSocket,
-     "Hello Client",
-     12,
-     0);
+int main()
+{
+    int serverSocket, clientSocket;
+    struct sockaddr_in serverAddr;
+    socklen_t addrSize;
+
+    char buffer[1024];
+
+    /* Create Socket */
+
+    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+
+    if(serverSocket &lt; 0)
+    {
+        perror("Socket Creation Failed");
+        exit(1);
+    }
+
+    printf("Socket Created Successfully...\n");
+
+    /* Server Address */
+
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_addr.s_addr = INADDR_ANY;
+    serverAddr.sin_port = htons(PORT);
+
+    /* Bind */
+
+    if(bind(serverSocket,
+            (struct sockaddr*)&serverAddr,
+            sizeof(serverAddr)) &lt; 0)
+    {
+        perror("Bind Failed");
+        exit(1);
+    }
+
+    printf("Bind Successful...\n");
+
+    /* Listen */
+
+    listen(serverSocket,5);
+
+    printf("Waiting for Client...\n");
+
+    addrSize = sizeof(serverAddr);
+
+    /* Accept */
+
+    clientSocket = accept(serverSocket,
+                          NULL,
+                          NULL);
+
+    if(clientSocket &lt; 0)
+    {
+        perror("Accept Failed");
+        exit(1);
+    }
+
+    printf("Client Connected...\n");
+
+    /* Receive */
+
+    recv(clientSocket,
+         buffer,
+         sizeof(buffer),
+         0);
+
+    printf("Client Says : %s\n",buffer);
+
+    /* Reply */
+
+    strcpy(buffer,"Hello Client");
+
+    send(clientSocket,
+         buffer,
+         strlen(buffer)+1,
+         0);
+
+    printf("Reply Sent...\n");
+
+    close(clientSocket);
+
+    close(serverSocket);
+
+    printf("Connection Closed...\n");
+
+    return 0;
+}
 </code></pre>
 
 </div>
+👤 Simple TCP Client
+</h2>
 
 <h2 class="section-title">
-👤 Simple TCP Client
+<i class="fas fa-user text-primary me-2"></i>
+Complete TCP Client Program (client.c)
 </h2>
 
 <div class="card p-4">
 
-<pre><code>
-send(sockfd,
-     "Hi Server",
-     10,
-     0);
+<p>
+The following TCP client creates a socket, connects to the server,
+sends the message <b>"Hi Server"</b>, receives the server's reply,
+and displays it on the screen.
+</p>
 
-recv(sockfd,
-     buffer,
-     sizeof(buffer),
-     0);
+<pre><code class="language-c">
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
 
-printf("Server says: %s\n",
-       buffer);
+#define PORT 8080
+
+int main()
+{
+    int sockfd;
+    struct sockaddr_in serverAddr;
+
+    char buffer[1024];
+
+    /* Create Socket */
+
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+    if(sockfd < 0)
+    {
+        perror("Socket Creation Failed");
+        exit(1);
+    }
+
+    printf("Socket Created Successfully...\n");
+
+    /* Server Address */
+
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(PORT);
+
+    inet_pton(AF_INET,
+              "127.0.0.1",
+              &serverAddr.sin_addr);
+
+    /* Connect */
+
+    if(connect(sockfd,
+               (struct sockaddr *)&serverAddr,
+               sizeof(serverAddr)) < 0)
+    {
+        perror("Connection Failed");
+        exit(1);
+    }
+
+    printf("Connected to Server...\n");
+
+    /* Read Message */
+
+    printf("Enter Message : ");
+    fgets(buffer,sizeof(buffer),stdin);
+
+    /* Send */
+
+    send(sockfd,
+         buffer,
+         strlen(buffer)+1,
+         0);
+
+    printf("Message Sent...\n");
+
+    /* Receive */
+
+    recv(sockfd,
+         buffer,
+         sizeof(buffer),
+         0);
+
+    printf("\nReply from Server : %s\n",
+           buffer);
+
+    /* Close */
+
+    close(sockfd);
+
+    printf("Connection Closed...\n");
+
+    return 0;
+}
+
 </code></pre>
 
 </div>
