@@ -562,113 +562,143 @@ Examples include:
 
 <!-- ===================================================== -->
 
-<h2 class="section-title">
-
-🔄 Client–Server Communication Flow
-
-</h2>
-
-<h2 class="section-title">
-<i class="fas fa-exchange-alt text-primary me-2"></i>
-Client–Server Communication Flow
-</h2>
-
-<div class="card p-5 shadow-sm">
-
 <div class="row">
 
-<!-- CLIENT -->
+    <!-- CLIENT -->
+    <div class="col-md-4">
+        <!-- Vertical client flow -->
+    </div>
 
-<div class="col-md-5">
+    <!-- ARROWS -->
+    <div class="col-md-4">
+        <!-- Horizontal request/response arrows -->
+    </div>
+
+    <!-- SERVER -->
+    <div class="col-md-4">
+        <!-- Vertical server flow -->
+    </div>
+
+</div>
 
 <div class="card border-primary">
 
-<div class="card-header bg-primary text-white text-center fw-bold">
+<div class="card-header bg-primary text-white text-center">
+👤 TCP Client
+</div>
 
-<i class="fas fa-user me-2"></i>CLIENT
+<div class="card-body text-center">
+
+<div class="border rounded p-2 mb-2">socket()</div>
+
+<i class="fas fa-arrow-down my-2"></i>
+
+<div class="border rounded p-2 mb-2">connect()</div>
+
+<i class="fas fa-arrow-down my-2"></i>
+
+<div class="border rounded p-2 mb-2 bg-primary text-white">
+send()
+</div>
+
+<i class="fas fa-arrow-down my-2"></i>
+
+<div class="border rounded p-2 mb-2">
+recv()
+</div>
+
+<i class="fas fa-arrow-down my-2"></i>
+
+<div class="border rounded p-2 bg-danger-subtle">
+close()
+</div>
 
 </div>
 
-<div class="card-body">
-
-<div class="alert alert-light border mb-2">① socket()</div>
-
-<div class="alert alert-light border mb-2">② connect()</div>
-
-<div class="alert alert-light border mb-2">③ Send Request</div>
-
-<div class="alert alert-light border mb-2">④ Wait for Response</div>
-
-<div class="alert alert-light border mb-2">⑤ recv()</div>
-
-<div class="alert alert-light border mb-2">⑥ Display Result</div>
-
 </div>
+<div class="d-flex flex-column justify-content-center h-100">
 
-</div>
+<div class="text-center my-5">
 
-</div>
+<i class="fas fa-long-arrow-alt-right fa-3x text-primary"></i>
 
-<!-- MIDDLE -->
-
-<div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-
-<div class="text-primary fs-2">
-
-<i class="fas fa-arrow-right"></i>
-
-</div>
-
-<p class="fw-bold text-success my-3">
-
-REQUEST
-
-</p>
-
-<div class="text-danger fs-2">
-
-<i class="fas fa-arrow-left"></i>
-
-</div>
-
-<p class="fw-bold text-danger">
-
-RESPONSE
-
+<p class="fw-bold mt-2">
+Connection Request
 </p>
 
 </div>
 
-<!-- SERVER -->
+<div class="text-center my-5">
 
-<div class="col-md-5">
+<i class="fas fa-long-arrow-alt-right fa-3x text-success"></i>
 
+<p class="fw-bold mt-2">
+"Hi Server"
+</p>
+
+</div>
+
+<div class="text-center my-5">
+
+<i class="fas fa-long-arrow-alt-left fa-3x text-danger"></i>
+
+<p class="fw-bold mt-2">
+"Hello Client"
+</p>
+
+</div>
+
+<div class="text-center my-5">
+
+<i class="fas fa-long-arrow-alt-right fa-3x text-secondary"></i>
+
+<p class="fw-bold mt-2">
+Connection Closed
+</p>
+
+</div>
+
+</div>
 <div class="card border-success">
 
-<div class="card-header bg-success text-white text-center fw-bold">
-
-<i class="fas fa-server me-2"></i>SERVER
-
+<div class="card-header bg-success text-white text-center">
+🖥 TCP Server
 </div>
 
-<div class="card-body">
+<div class="card-body text-center">
 
-<div class="alert alert-light border mb-2">① socket()</div>
+<div class="border rounded p-2 mb-2">socket()</div>
 
-<div class="alert alert-light border mb-2">② bind()</div>
+<i class="fas fa-arrow-down my-2"></i>
 
-<div class="alert alert-light border mb-2">③ listen()</div>
+<div class="border rounded p-2 mb-2">bind()</div>
 
-<div class="alert alert-light border mb-2">④ accept()</div>
+<i class="fas fa-arrow-down my-2"></i>
 
-<div class="alert alert-light border mb-2">⑤ Process Request</div>
+<div class="border rounded p-2 mb-2">listen()</div>
 
-<div class="alert alert-light border mb-2">⑥ send()</div>
+<i class="fas fa-arrow-down my-2"></i>
 
+<div class="border rounded p-2 mb-2">
+accept()
 </div>
 
+<i class="fas fa-arrow-down my-2"></i>
+
+<div class="border rounded p-2 mb-2 bg-warning">
+Process Request
 </div>
 
+<i class="fas fa-arrow-down my-2"></i>
+
+<div class="border rounded p-2 mb-2 bg-success text-white">
+send()
+</div>
+
+<i class="fas fa-arrow-down my-2"></i>
+
+<div class="border rounded p-2 bg-danger-subtle">
+close()
 </div>
 
 </div>
