@@ -20,44 +20,37 @@ rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
-
 <style>
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
-
-font-family:'Poppins',sans-serif;
-
+font-family:Arial,Helvetica,sans-serif;
 background:#f5f7fb;
-
 color:#263238;
-
-line-height:1.8;
-
 }
 
 .navbar{
-
 background:#0b3c7a;
-
 }
 
 .hero{
 
 background:linear-gradient(135deg,#082f6b,#1976d2);
 
-color:white;
-
 padding:90px 0;
+
+color:white;
 
 }
 
 .hero h1{
 
-font-size:52px;
+font-size:48px;
 
-font-weight:700;
+font-weight:bold;
 
 }
 
@@ -67,27 +60,13 @@ font-size:20px;
 
 }
 
-.section-title{
-
-border-left:6px solid #1976d2;
-
-padding-left:14px;
-
-margin-top:60px;
-
-margin-bottom:25px;
-
-font-weight:bold;
-
-}
-
 .card{
 
 border:none;
 
 border-radius:18px;
 
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+box-shadow:0 8px 20px rgba(0,0,0,.12);
 
 transition:.3s;
 
@@ -95,33 +74,45 @@ transition:.3s;
 
 .card:hover{
 
-transform:translateY(-6px);
+transform:translateY(-5px);
 
 }
 
-.api-card{
+.section-title{
 
-padding:20px;
+border-left:6px solid #1976d2;
 
-text-align:center;
+padding-left:12px;
 
-height:100%;
+margin-top:60px;
+
+margin-bottom:20px;
+
+font-weight:bold;
 
 }
 
-.flow{
+.badge-topic{
 
-background:#111827;
+font-size:14px;
 
-color:#7CFC00;
+margin:3px;
 
-padding:20px;
+padding:8px 14px;
+
+}
+
+.step{
+
+border-left:5px solid #1976d2;
+
+background:white;
+
+padding:18px;
+
+margin-bottom:18px;
 
 border-radius:12px;
-
-font-family:Consolas;
-
-overflow:auto;
 
 }
 
@@ -137,23 +128,95 @@ margin-top:60px;
 
 }
 
+.stats{
+
+font-size:28px;
+
+font-weight:bold;
+
+color:#1976d2;
+
+}
+
 </style>
 
 </head>
 
-<body>
+<body id="top">
 
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 
 <div class="container">
 
 <a class="navbar-brand fw-bold"
 
-href="../networklab.html">
+href="module.html">
+
+<i class="fas fa-network-wired"></i>
 
 PCCSL507
 
 </a>
+
+<button class="navbar-toggler"
+
+type="button"
+
+data-bs-toggle="collapse"
+
+data-bs-target="#menu">
+
+<span class="navbar-toggler-icon">
+
+</span>
+
+</button>
+
+<div class="collapse navbar-collapse"
+
+id="menu">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+
+<a class="nav-link"
+
+href="module.html">
+
+Network Lab
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link"
+
+href="lab4.html">
+
+Lab 4
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link active"
+
+href="#">
+
+Lab 5
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
 
 </div>
 
@@ -165,31 +228,27 @@ PCCSL507
 
 <h1>
 
-<i class="fas fa-network-wired"></i>
+<i class="fas fa-book-open"></i>
 
-Socket Programming
+Lab 5
 
-Learning Module
+<br>
+
+Socket Programming Fundamentals
 
 </h1>
 
 <p class="mt-4">
 
-Everything you need before writing TCP Socket Programs
+Pre-Laboratory Learning Module
 
 </p>
 
-<a href="#intro"
+<p>
 
-class="btn btn-warning btn-lg mt-3">
+Study the theoretical concepts of socket programming before performing TCP and UDP programming experiments.
 
-Start Learning
-
-</a>
-
-</div>
-
-</section>
+</p>
 
 <main class="container py-5">
 
