@@ -2051,49 +2051,36 @@ int main()
 </code></pre>
 
 </div>
-
 <h2 class="section-title">
-💻 Expected Output
+🛠 Compilation
+</h2>
+
+<div class="flow">
+gcc server.c -o server
+
+gcc client.c -o client
+</div>
+<h2 class="section-title">
+▶ Execution
 </h2>
 
 <div class="card p-4">
 
-<pre>
+<h5>Terminal 1</h5>
 
--------- SERVER --------
-
-Waiting for client...
-
-Client Connected
-
-Client says:
-Hi Server
-
-Reply Sent
-
-------------------------
-
-
-
--------- CLIENT --------
-
-Connected
-
-Sending...
-
-Hi Server
-
-Waiting...
-
-Server says:
-
-Hello Client
-
-</pre>
-
+<div class="flow">
+./server
 </div>
 
-<div class="alert alert-primary">
+<br>
+
+<h5>Terminal 2</h5>
+
+<div class="flow">
+./client
+</div>
+
+</div>
 
 <h5>
 
