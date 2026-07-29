@@ -1956,6 +1956,125 @@ Hello Client
 </ul>
 
 </div>
+<h2 class="section-title">
+    <i class="fas fa-comments text-primary me-2"></i>
+    Your First Client–Server Conversation
+</h2>
+
+<p class="lead">
+Before sending complex data such as a matrix, let's understand socket programming
+using a simple conversation.
+</p>
+
+<div class="card shadow-sm p-4">
+
+    <div class="row">
+
+        <!-- CLIENT -->
+        <div class="col-md-6">
+
+            <div class="card border-primary h-100">
+
+                <div class="card-header bg-primary text-white text-center fw-bold">
+                    👤 CLIENT
+                </div>
+
+                <div class="card-body">
+
+                    <div class="text-end mb-3">
+                        <span class="badge bg-primary p-3 fs-6">
+                            Hi Server 👋
+                        </span>
+                    </div>
+
+                    <div class="text-start mb-3">
+                        <span class="badge bg-success p-3 fs-6">
+                            Hello Client 😊
+                        </span>
+                    </div>
+
+                    <div class="text-end mb-3">
+                        <span class="badge bg-primary p-3 fs-6">
+                            How are you?
+                        </span>
+                    </div>
+
+                    <div class="text-start">
+                        <span class="badge bg-success p-3 fs-6">
+                            I'm ready to receive data!
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SERVER -->
+
+        <div class="col-md-6">
+
+            <div class="card border-success h-100">
+
+                <div class="card-header bg-success text-white text-center fw-bold">
+                    🖥 SERVER
+                </div>
+
+                <div class="card-body">
+
+<pre><code>
+recv()
+
+↓
+
+Message Received
+
+↓
+
+printf()
+
+↓
+
+send()
+
+↓
+
+Reply Sent
+</code></pre>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="alert alert-info mt-4">
+
+<h5>💡 Behind the Scenes</h5>
+
+<ol>
+
+<li>The client creates a socket.</li>
+
+<li>The client connects to the server.</li>
+
+<li>The client sends <strong>"Hi Server"</strong>.</li>
+
+<li>The server receives the message using <code>recv()</code>.</li>
+
+<li>The server replies using <code>send()</code>.</li>
+
+<li>The client receives the reply and displays it.</li>
+
+</ol>
+
+</div>
+
 <!-- ===================================================== -->
 <!-- LAB 5 IMPLEMENTATION -->
 <!-- ===================================================== -->
