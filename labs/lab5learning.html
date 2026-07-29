@@ -1702,6 +1702,260 @@ Client:
 socket → connect → send → recv → close
 
 </div>
+ <h2 class="section-title">
+<i class="fas fa-comments text-primary me-2"></i>
+Your First Socket Program
+</h2>
+
+<div class="alert alert-success">
+
+<b>Goal</b>
+
+<br><br>
+
+Before sending an entire matrix, let's understand socket programming with the
+simplest possible example.
+
+The client sends the message
+
+<b>"Hi Server"</b>
+
+to the server.
+
+The server receives the message and replies with
+
+<b>"Hello Client"</b>.
+
+</div>
+<h3 class="mt-5 mb-4">
+📡 Communication Workflow
+</h3>
+
+<div class="card shadow-sm p-5">
+
+<div class="text-center">
+
+<div class="card border-primary mx-auto mb-3" style="max-width:420px;">
+
+<div class="card-header bg-primary text-white fw-bold">
+👤 CLIENT
+</div>
+
+<div class="list-group list-group-flush">
+
+<div class="list-group-item">
+Create Socket
+</div>
+
+<div class="list-group-item">
+Connect to Server
+</div>
+
+<div class="list-group-item">
+Send
+<br>
+<b>"Hi Server"</b>
+</div>
+
+</div>
+
+</div>
+
+<div class="display-6 text-primary">
+
+↓
+
+</div>
+
+<div class="badge bg-info fs-6 px-4 py-2 mb-3">
+
+TCP Connection
+
+</div>
+
+<div class="display-6 text-primary">
+
+↓
+
+</div>
+
+<div class="card border-success mx-auto mb-3" style="max-width:420px;">
+
+<div class="card-header bg-success text-white fw-bold">
+🖥 SERVER
+</div>
+
+<div class="list-group list-group-flush">
+
+<div class="list-group-item">
+Accept Connection
+</div>
+
+<div class="list-group-item">
+Receive
+<br>
+<b>"Hi Server"</b>
+</div>
+
+<div class="list-group-item bg-warning-subtle">
+Print Message
+</div>
+
+<div class="list-group-item">
+Send
+<br>
+<b>"Hello Client"</b>
+</div>
+
+</div>
+
+</div>
+
+<div class="display-6 text-success">
+
+↓
+
+</div>
+
+<div class="card border-primary mx-auto" style="max-width:420px;">
+
+<div class="card-header bg-primary text-white fw-bold">
+👤 CLIENT
+</div>
+
+<div class="list-group list-group-flush">
+
+<div class="list-group-item">
+Receive
+<br>
+<b>"Hello Client"</b>
+</div>
+
+<div class="list-group-item bg-success-subtle">
+Display Reply
+</div>
+
+<div class="list-group-item bg-danger-subtle">
+Close Socket
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h2 class="section-title">
+🖥 Simple TCP Server
+</h2>
+
+<div class="card p-4">
+
+<pre><code>
+char buffer[100];
+
+recv(clientSocket, buffer, sizeof(buffer), 0);
+
+printf("Client says: %s\n", buffer);
+
+send(clientSocket,
+     "Hello Client",
+     12,
+     0);
+</code></pre>
+
+</div>
+
+<h2 class="section-title">
+👤 Simple TCP Client
+</h2>
+
+<div class="card p-4">
+
+<pre><code>
+send(sockfd,
+     "Hi Server",
+     10,
+     0);
+
+recv(sockfd,
+     buffer,
+     sizeof(buffer),
+     0);
+
+printf("Server says: %s\n",
+       buffer);
+</code></pre>
+
+</div>
+
+<h2 class="section-title">
+💻 Expected Output
+</h2>
+
+<div class="card p-4">
+
+<pre>
+
+-------- SERVER --------
+
+Waiting for client...
+
+Client Connected
+
+Client says:
+Hi Server
+
+Reply Sent
+
+------------------------
+
+
+
+-------- CLIENT --------
+
+Connected
+
+Sending...
+
+Hi Server
+
+Waiting...
+
+Server says:
+
+Hello Client
+
+</pre>
+
+</div>
+
+<div class="alert alert-primary">
+
+<h5>
+
+🎯 What You Learned
+
+</h5>
+
+<ul class="mb-0">
+
+<li>Create a TCP socket.</li>
+
+<li>Establish a client-server connection.</li>
+
+<li>Send data using <code>send()</code>.</li>
+
+<li>Receive data using <code>recv()</code>.</li>
+
+<li>Close the socket after communication.</li>
+
+<li>This communication pattern is the foundation for the Matrix Classifier experiment.</li>
+
+</ul>
+
+</div>
 <!-- ===================================================== -->
 <!-- LAB 5 IMPLEMENTATION -->
 <!-- ===================================================== -->
