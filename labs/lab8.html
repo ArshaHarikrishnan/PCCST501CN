@@ -1,0 +1,639 @@
+<!-- ====================================================== -->
+<!-- HERO SECTION -->
+<!-- ====================================================== -->
+
+<section class="hero-section text-center text-white py-5" id="top">
+
+<div class="container">
+
+<span class="badge bg-warning text-dark px-3 py-2 mb-3">
+
+Computer Networks Laboratory • PCCSL507
+
+</span>
+
+<h1 class="display-4 fw-bold">
+
+🕒 Lab 8
+
+<br>
+
+Concurrent Time Server using UDP Socket Programming
+
+</h1>
+
+<p class="lead mt-3">
+
+Learn how UDP enables lightweight client-server communication by
+implementing a <strong>Concurrent Time Server</strong> that responds
+to multiple client requests with the current system time.
+
+</p>
+
+<div class="mt-4">
+
+<a href="#overview" class="btn btn-primary btn-lg me-2">
+
+<i class="fas fa-book-open"></i>
+
+Start Learning
+
+</a>
+
+<a href="#experiment" class="btn btn-outline-light btn-lg">
+
+<i class="fas fa-code"></i>
+
+View Experiment
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- COURSE STATISTICS -->
+<!-- ====================================================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-paper-plane fa-3x text-primary mb-3"></i>
+
+<h2>UDP</h2>
+
+<p>
+
+Connectionless Communication
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-clock fa-3x text-success mb-3"></i>
+
+<h2>Time</h2>
+
+<p>
+
+Current System Time
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-users fa-3x text-warning mb-3"></i>
+
+<h2>Concurrent</h2>
+
+<p>
+
+Multiple Client Requests
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-server fa-3x text-danger mb-3"></i>
+
+<h2>Server</h2>
+
+<p>
+
+Responds with System Time
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- LEARNING OUTCOMES -->
+<!-- ====================================================== -->
+
+<section id="overview" class="container py-5">
+
+<h2 class="section-title">
+
+🎯 Learning Outcomes
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-6">
+
+<div class="card border-primary h-100">
+
+<div class="card-header bg-primary text-white">
+
+After completing this lab, you will be able to
+
+</div>
+
+<div class="card-body">
+
+<ul>
+
+<li>Understand UDP socket programming.</li>
+
+<li>Implement a UDP Time Server.</li>
+
+<li>Create a UDP client application.</li>
+
+<li>Exchange datagrams between client and server.</li>
+
+<li>Handle multiple client requests concurrently.</li>
+
+<li>Use Linux socket APIs.</li>
+
+<li>Obtain system time using C library functions.</li>
+
+<li>Observe request-response communication.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="card border-success h-100">
+
+<div class="card-header bg-success text-white">
+
+Prerequisites
+
+</div>
+
+<div class="card-body">
+
+<ul>
+
+<li>Linux Operating System</li>
+
+<li>Basic C Programming</li>
+
+<li>UDP Socket APIs</li>
+
+<li>Datagram Communication</li>
+
+<li>gcc Compiler</li>
+
+<li>Knowledge of Client-Server Model</li>
+
+<li>Computer Networks Fundamentals</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- WHAT IS A TIME SERVER -->
+<!-- ====================================================== -->
+
+<section class="container py-5">
+
+<h2 class="section-title">
+
+🕒 What is a Time Server?
+
+</h2>
+
+<div class="card shadow-sm p-4">
+
+<p>
+
+A <strong>Time Server</strong> is a network application that provides
+the current date and time to requesting clients.
+When a client sends a request, the server immediately retrieves
+its current system time and sends it back to the client.
+
+</p>
+
+<div class="alert alert-primary mt-3">
+
+<b>Key Idea</b>
+
+<br><br>
+
+Unlike connection-oriented applications,
+a UDP Time Server simply waits for incoming datagrams,
+processes each request independently,
+and returns the current system time.
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- WHY UDP -->
+<!-- ====================================================== -->
+
+<section class="container py-5">
+
+<h2 class="section-title">
+
+📡 Why UDP for a Time Server?
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-6">
+
+<div class="card border-success h-100">
+
+<div class="card-header bg-success text-white">
+
+Advantages
+
+</div>
+
+<div class="card-body">
+
+<ul>
+
+<li>Connectionless communication</li>
+
+<li>Very low overhead</li>
+
+<li>Fast request-response service</li>
+
+<li>No connection establishment delay</li>
+
+<li>Suitable for lightweight applications</li>
+
+<li>Simple implementation</li>
+
+<li>Efficient for time queries</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="card border-danger h-100">
+
+<div class="card-header bg-danger text-white">
+
+Limitations
+
+</div>
+
+<div class="card-body">
+
+<ul>
+
+<li>No guaranteed delivery</li>
+
+<li>Packets may be lost</li>
+
+<li>No ordering guarantee</li>
+
+<li>No retransmission mechanism</li>
+
+<li>No congestion control</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- REAL WORLD APPLICATIONS -->
+<!-- ====================================================== -->
+
+<section class="container py-5">
+
+<h2 class="section-title">
+
+🌍 Real-World Applications
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+
+<div class="card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-globe fa-4x text-primary mb-3"></i>
+
+<h4>NTP Servers</h4>
+
+<p>
+
+Synchronize clocks across computer networks.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-satellite fa-4x text-success mb-3"></i>
+
+<h4>GPS Systems</h4>
+
+<p>
+
+Provide highly accurate universal time.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-network-wired fa-4x text-danger mb-3"></i>
+
+<h4>Network Devices</h4>
+
+<p>
+
+Routers and switches synchronize system clocks.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-server fa-4x text-warning mb-3"></i>
+
+<h4>Data Centers</h4>
+
+<p>
+
+Maintain accurate timestamps for logs.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-cloud fa-4x text-info mb-3"></i>
+
+<h4>Cloud Platforms</h4>
+
+<p>
+
+Synchronize distributed services.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card text-center h-100">
+
+<div class="card-body">
+
+<i class="fas fa-mobile-alt fa-4x text-secondary mb-3"></i>
+
+<h4>Mobile Networks</h4>
+
+<p>
+
+Provide accurate network time to devices.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- UDP SOCKET PROGRAMMING REFRESHER -->
+<!-- ====================================================== -->
+
+<section class="container py-5">
+
+<h2 class="section-title">
+
+📚 UDP Socket Programming Refresher
+
+</h2>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Function</th>
+
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td><code>socket()</code></td>
+
+<td>Create a UDP socket.</td>
+
+</tr>
+
+<tr>
+
+<td><code>bind()</code></td>
+
+<td>Bind the socket to a port number.</td>
+
+</tr>
+
+<tr>
+
+<td><code>sendto()</code></td>
+
+<td>Send a datagram to the server/client.</td>
+
+</tr>
+
+<tr>
+
+<td><code>recvfrom()</code></td>
+
+<td>Receive a datagram.</td>
+
+</tr>
+
+<tr>
+
+<td><code>time()</code></td>
+
+<td>Get the current system time.</td>
+
+</tr>
+
+<tr>
+
+<td><code>ctime()</code></td>
+
+<td>Convert time into a readable string.</td>
+
+</tr>
+
+<tr>
+
+<td><code>close()</code></td>
+
+<td>Close the socket.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="alert alert-success mt-5">
+
+<h4>
+
+🚀 Next Section
+
+</h4>
+
+<p>
+
+Next, we will study the architecture of a UDP Time Server,
+understand how clients communicate using datagrams,
+and explore how a concurrent server handles multiple requests efficiently.
+
+</p>
+
+</div>
+
+</section>
