@@ -485,7 +485,33 @@ transform:translateY(-8px);
     border:2px solid #fff;
     color:#fff;
 }
+/* ==========================================
+        LAB 7
+========================================== */
 
+.stat-card{
+    transition:.35s;
+}
+
+.stat-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.section-title{
+    font-size:2rem;
+    font-weight:700;
+    color:#0f4c81;
+    margin-bottom:30px;
+}
+
+.flow{
+    background:#f8f9fa;
+    border-left:5px solid #1565c0;
+    padding:15px;
+    border-radius:8px;
+    white-space:pre-wrap;
+}
 .hero-section .btn-outline-light:hover{
     background:#fff;
     color:#1565c0;
