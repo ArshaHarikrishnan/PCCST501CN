@@ -513,6 +513,29 @@ transform:translateY(-8px);
     white-space:pre-wrap;
 }
 .hero-section .btn-outline-light:hover{
+    backgr.hero-section{
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #42a5f5 100%);
+    padding: 120px 0 100px;
+    color: white;
+}
+
+.hero-section h1{
+    color:#fff;
+    font-weight:700;
+}
+
+.hero-section p{
+    color:rgba(255,255,255,.9);
+}
+
+.hero-section .btn-outline-light{
+    border:2px solid #fff;
+}
+
+.hero-section .btn-outline-light:hover{
     background:#fff;
     color:#1565c0;
+}ound:#fff;
+    color:#1565c0;
 }
+
