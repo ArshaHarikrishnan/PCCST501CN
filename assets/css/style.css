@@ -538,4 +538,6 @@ transform:translateY(-8px);
 }ound:#fff;
     color:#1565c0;
 }
-
+.hero-section{
+    background:red !important;
+}
