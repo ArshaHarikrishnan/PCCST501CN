@@ -3140,89 +3140,92 @@ packet_capture.c
 #include &lt;arpa/inet.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;netinet/ip.h&gt;
+#include &lt;linux/if_packet.h&gt;
+#include &lt;net/ethernet.h&gt;
 
 #define BUFFER_SIZE 65536
 
 int main()
 {
     int sockfd;
-
     unsigned char *buffer;
-
     struct sockaddr saddr;
+    socklen_t saddr_len;
 
-    socklen_t saddr_size;
+    struct iphdr *ip_header;
 
-    struct iphdr *ip;
+    buffer = (unsigned char *)malloc(BUFFER_SIZE);
 
-    buffer=(unsigned char*)malloc(BUFFER_SIZE);
-
-    sockfd=socket(AF_INET,
-                  SOCK_RAW,
-                  IPPROTO_TCP);
-
-    if(sockfd<0)
+    if(buffer == NULL)
     {
-        perror("Socket Error");
-        exit(1);
+        printf("Memory Allocation Failed\n");
+        return 1;
     }
 
-    printf("===================================\n");
-    printf(" Raw Socket Packet Sniffer Started\n");
-    printf("===================================\n\n");
+    /* Create Raw Socket */
+    sockfd = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+
+    if(sockfd < 0)
+    {
+        perror("Socket");
+        return 1;
+    }
+
+    printf("\n=========================================\n");
+    printf("   RAW SOCKET PACKET CAPTURE STARTED\n");
+    printf("=========================================\n");
 
     while(1)
     {
-        saddr_size=sizeof(saddr);
+        saddr_len = sizeof(saddr);
 
-        int data_size=
-        recvfrom(sockfd,
-                 buffer,
-                 BUFFER_SIZE,
-                 0,
-                 &saddr,
-                 &saddr_size);
+        int packet_size = recvfrom(sockfd,
+                                   buffer,
+                                   BUFFER_SIZE,
+                                   0,
+                                   &saddr,
+                                   &saddr_len);
 
-        if(data_size<0)
+        if(packet_size < 0)
         {
             perror("recvfrom");
             break;
         }
 
-        ip=(struct iphdr*)buffer;
+        ip_header = (struct iphdr *)buffer;
 
-        struct sockaddr_in src,dst;
+        struct sockaddr_in source;
+        struct sockaddr_in destination;
 
-        memset(&src,0,sizeof(src));
-        memset(&dst,0,sizeof(dst));
+        memset(&source,0,sizeof(source));
+        memset(&destination,0,sizeof(destination));
 
-        src.sin_addr.s_addr=ip->saddr;
-        dst.sin_addr.s_addr=ip->daddr;
+        source.sin_addr.s_addr = ip_header->saddr;
+        destination.sin_addr.s_addr = ip_header->daddr;
 
-        printf("----------------------------------------\n");
+        printf("\n----------------------------------------\n");
 
-        printf("Packet Length      : %d Bytes\n",
-                data_size);
+        printf("Packet Length      : %d Bytes\n",packet_size);
 
         printf("IP Version         : %d\n",
-                ip->version);
+               ip_header->version);
 
         printf("Header Length      : %d Bytes\n",
-                ip->ihl*4);
+               ip_header->ihl * 4);
 
         printf("TTL                : %d\n",
-                ip->ttl);
+               ip_header->ttl);
 
-        printf("Protocol           : %d\n",
-                ip->protocol);
+        printf("Protocol Number    : %d\n",
+               ip_header->protocol);
 
         printf("Source IP          : %s\n",
-                inet_ntoa(src.sin_addr));
+               inet_ntoa(source.sin_addr));
 
         printf("Destination IP     : %s\n",
-                inet_ntoa(dst.sin_addr));
+               inet_ntoa(destination.sin_addr));
 
-        printf("----------------------------------------\n\n");
+        printf("----------------------------------------\n");
     }
 
     close(sockfd);
