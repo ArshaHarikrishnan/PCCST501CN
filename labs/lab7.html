@@ -3374,7 +3374,890 @@ avoid resource leaks.
 </div>
 
 </section>
+<!-- ====================================================== -->
+<!-- OPTIONAL IMPLEMENTATION USING FORK -->
+<!-- ====================================================== -->
 
+<section id="fork-method" class="container py-5">
+
+<h2 class="section-title">
+
+🔄 Optional Implementation – Using fork()
+
+</h2>
+
+<div class="alert alert-warning">
+
+<h5>
+<i class="fas fa-lightbulb"></i>
+Alternative Approach
+</h5>
+
+<p class="mb-0">
+
+The multi-user chat server can also be implemented using
+<strong>process-based concurrency</strong> with the
+<strong>fork()</strong> system call.
+
+The main implementation of this experiment uses
+<strong>POSIX threads (pthread)</strong>. The
+<strong>fork()</strong> implementation is provided as an
+optional method to understand another approach to concurrent
+server programming.
+
+</p>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- CONCEPT -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card border-primary mb-4">
+
+<div class="card-header bg-primary text-white">
+
+<h4 class="mb-0">
+
+<i class="fas fa-project-diagram"></i>
+Concept
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+In the thread-based implementation, the server creates a
+separate thread for each connected client.
+
+In the alternative implementation, the server creates a
+<strong>child process using fork()</strong> for each client.
+
+</p>
+
+<div class="text-center my-4">
+
+<div class="p-4 bg-light rounded">
+
+<h5>Parent Server</h5>
+
+<p class="mb-2">
+
+accept()
+
+</p>
+
+<div class="row g-3">
+
+<div class="col-md-4">
+
+<div class="border rounded p-3">
+
+<strong>fork()</strong>
+
+<br>
+
+Child Process 1
+
+<br>
+
+Client 1
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="border rounded p-3">
+
+<strong>fork()</strong>
+
+<br>
+
+Child Process 2
+
+<br>
+
+Client 2
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="border rounded p-3">
+
+<strong>fork()</strong>
+
+<br>
+
+Child Process 3
+
+<br>
+
+Client 3
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- IMPORTANT DIFFERENCE -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card border-danger mb-4">
+
+<div class="card-header bg-danger text-white">
+
+<h4 class="mb-0">
+
+⚠️ Important Difference
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Threads belonging to the same process can directly access
+shared memory. However, a child process created using
+<strong>fork()</strong> has its own separate address space.
+
+</p>
+
+<p>
+
+Therefore, the child processes cannot simply update a common
+<strong>clients[]</strong> array in the parent process.
+
+</p>
+
+<p>
+
+For this reason, the optional fork-based implementation uses
+<strong>pipes</strong> for communication between child processes
+and the parent server.
+
+</p>
+
+<div class="alert alert-info mb-0">
+
+<strong>Communication flow:</strong>
+
+<br><br>
+
+Child Process
+
+<i class="fas fa-arrow-down"></i>
+
+Pipe
+
+<i class="fas fa-arrow-down"></i>
+
+Parent Server
+
+<i class="fas fa-arrow-down"></i>
+
+Broadcast
+
+<i class="fas fa-arrow-down"></i>
+
+All Connected Clients
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- SERVER ALGORITHM -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card mb-4">
+
+<div class="card-header bg-dark text-white">
+
+<h4 class="mb-0">
+
+🖥️ Server Algorithm – fork() Method
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<ol>
+
+<li>Start the server.</li>
+
+<li>Create a TCP socket using
+<strong>socket()</strong>.</li>
+
+<li>Bind the socket to the specified port using
+<strong>bind()</strong>.</li>
+
+<li>Put the socket into listening mode using
+<strong>listen()</strong>.</li>
+
+<li>Initialize the client list.</li>
+
+<li>Wait for an incoming client connection.</li>
+
+<li>Accept the client using
+<strong>accept()</strong>.</li>
+
+<li>Create a pipe for communication between the child
+and parent processes.</li>
+
+<li>Create a child process using
+<strong>fork()</strong>.</li>
+
+<li>
+
+In the child process, communicate with the connected client.
+
+</li>
+
+<li>
+
+Receive the client's username and messages.
+
+</li>
+
+<li>
+
+Send received messages to the parent through the pipe.
+
+</li>
+
+<li>
+
+The parent receives messages from the child process.
+
+</li>
+
+<li>
+
+The parent broadcasts the message to connected clients.
+
+</li>
+
+<li>
+
+If a client disconnects, remove the client from the
+client list.
+
+</li>
+
+<li>
+
+The parent continues accepting new clients.
+
+</li>
+
+<li>
+
+Repeat the process until the server is terminated.
+
+</li>
+
+<li>
+
+Close the server socket and terminate the program.
+
+</li>
+
+</ol>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- CLIENT ALGORITHM -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card mb-4">
+
+<div class="card-header bg-success text-white">
+
+<h4 class="mb-0">
+
+👤 Client Algorithm
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<ol>
+
+<li>Start the client.</li>
+
+<li>Create a TCP socket using
+<strong>socket()</strong>.</li>
+
+<li>Specify the server IP address and port number.</li>
+
+<li>Connect to the server using
+<strong>connect()</strong>.</li>
+
+<li>Enter a username.</li>
+
+<li>Send the username to the server.</li>
+
+<li>Create a receiving thread.</li>
+
+<li>Read messages from the keyboard.</li>
+
+<li>Send messages to the server using
+<strong>send()</strong>.</li>
+
+<li>Receive messages from the server using
+<strong>recv()</strong>.</li>
+
+<li>Display messages received from other clients.</li>
+
+<li>Continue communication until the user enters
+<strong>exit</strong>.</li>
+
+<li>Close the socket.</li>
+
+<li>Terminate the program.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- SERVER CODE -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card mb-4">
+
+<div class="card-header bg-secondary text-white">
+
+<h4 class="mb-0">
+
+💻 Server Program – fork() Version
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Save the following program as
+<strong>server_fork.c</strong>.
+
+</p>
+
+<pre><code class="language-c">
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;signal.h&gt;
+
+#define PORT 8080
+#define BUFFER_SIZE 1024
+
+void handle_client(int client_socket)
+{
+    char buffer[BUFFER_SIZE];
+
+    while (1)
+    {
+        memset(buffer, 0, sizeof(buffer));
+
+        int n = recv(client_socket,
+                     buffer,
+                     sizeof(buffer) - 1,
+                     0);
+
+        if (n &lt;= 0)
+            break;
+
+        buffer[n] = '\0';
+
+        if (strcmp(buffer, "exit") == 0)
+            break;
+
+        printf("Client [%d]: %s\n",
+               getpid(),
+               buffer);
+
+        send(client_socket,
+             buffer,
+             strlen(buffer),
+             0);
+    }
+
+    close(client_socket);
+    exit(0);
+}
+
+void reap_children(int sig)
+{
+    while (waitpid(-1, NULL, WNOHANG) &gt; 0);
+}
+
+int main()
+{
+    int server_socket;
+    int client_socket;
+
+    struct sockaddr_in server_addr;
+    struct sockaddr_in client_addr;
+
+    socklen_t client_len =
+        sizeof(client_addr);
+
+    signal(SIGCHLD, reap_children);
+
+    server_socket =
+        socket(AF_INET,
+               SOCK_STREAM,
+               0);
+
+    if (server_socket &lt; 0)
+    {
+        perror("socket");
+        exit(1);
+    }
+
+    memset(&server_addr,
+           0,
+           sizeof(server_addr));
+
+    server_addr.sin_family =
+        AF_INET;
+
+    server_addr.sin_addr.s_addr =
+        INADDR_ANY;
+
+    server_addr.sin_port =
+        htons(PORT);
+
+    if (bind(server_socket,
+             (struct sockaddr *)&amp;server_addr,
+             sizeof(server_addr)) &lt; 0)
+    {
+        perror("bind");
+        exit(1);
+    }
+
+    listen(server_socket, 10);
+
+    printf("TCP Server started\n");
+    printf("Server PID: %d\n", getpid());
+    printf("Port: %d\n", PORT);
+    printf("Waiting for clients...\n");
+
+    while (1)
+    {
+        client_socket =
+            accept(server_socket,
+                   (struct sockaddr *)&amp;client_addr,
+                   &amp;client_len);
+
+        if (client_socket &lt; 0)
+        {
+            perror("accept");
+            continue;
+        }
+
+        pid_t pid = fork();
+
+        if (pid == 0)
+        {
+            close(server_socket);
+
+            printf("Child process PID %d "
+                   "handling client\n",
+                   getpid());
+
+            handle_client(client_socket);
+        }
+
+        else if (pid &gt; 0)
+        {
+            close(client_socket);
+
+            printf("Created child process "
+                   "PID: %d\n",
+                   pid);
+        }
+
+        else
+        {
+            perror("fork");
+            close(client_socket);
+        }
+    }
+
+    close(server_socket);
+
+    return 0;
+}
+
+</code></pre>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- NOTE ABOUT CODE -->
+<!-- ------------------------------------------------------ -->
+
+<div class="alert alert-warning">
+
+<h5>
+
+⚠️ Educational Note
+
+</h5>
+
+<p>
+
+The above simplified fork example demonstrates
+<strong>process-based concurrency</strong>. For a complete
+multi-user broadcast chat server, inter-process communication
+such as <strong>pipes</strong> or another IPC mechanism is
+required so that the parent can coordinate messages between
+different child processes.
+
+</p>
+
+<p class="mb-0">
+
+Students should first understand the primary
+<strong>pthread-based multi-user chat implementation</strong>
+before attempting the fork-based approach.
+
+</p>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- COMPILATION -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card border-success mb-4">
+
+<div class="card-header bg-success text-white">
+
+<h4 class="mb-0">
+
+⚙️ Compilation and Execution
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<h5>Compile</h5>
+
+<pre><code class="language-bash">
+
+gcc server_fork.c -o server_fork
+
+</code></pre>
+
+<h5>Run the Server</h5>
+
+<pre><code class="language-bash">
+
+./server_fork
+
+</code></pre>
+
+<h5>Compile Client</h5>
+
+<pre><code class="language-bash">
+
+gcc client.c -o client -lpthread
+
+</code></pre>
+
+<h5>Run Client</h5>
+
+<pre><code class="language-bash">
+
+./client 127.0.0.1 8080
+
+</code></pre>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- COMPARISON -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card border-info mb-4">
+
+<div class="card-header bg-info text-white">
+
+<h4 class="mb-0">
+
+⚖️ pthread vs fork()
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-hover">
+
+<thead>
+
+<tr>
+
+<th>Feature</th>
+
+<th>pthread</th>
+
+<th>fork()</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Concurrency Unit</td>
+
+<td>Thread</td>
+
+<td>Process</td>
+
+</tr>
+
+<tr>
+
+<td>Memory</td>
+
+<td>Shared</td>
+
+<td>Separate</td>
+
+</tr>
+
+<tr>
+
+<td>Creation</td>
+
+<td>pthread_create()</td>
+
+<td>fork()</td>
+
+</tr>
+
+<tr>
+
+<td>Communication</td>
+
+<td>Shared memory</td>
+
+<td>IPC may be required</td>
+
+</tr>
+
+<tr>
+
+<td>Resource Usage</td>
+
+<td>Generally lower</td>
+
+<td>Generally higher</td>
+
+</tr>
+
+<tr>
+
+<td>Client Handling</td>
+
+<td>One thread per client</td>
+
+<td>One child process per client</td>
+
+</tr>
+
+<tr>
+
+<td>Lab 7 Status</td>
+
+<td>
+<span class="badge bg-primary">
+Primary Method
+</span>
+</td>
+
+<td>
+<span class="badge bg-warning text-dark">
+Optional Method
+</span>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- VIVA QUESTIONS -->
+<!-- ------------------------------------------------------ -->
+
+<div class="card border-warning mb-4">
+
+<div class="card-header bg-warning">
+
+<h4 class="mb-0">
+
+🎓 Optional Method – Viva Questions
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<ol>
+
+<li>
+What is the purpose of <strong>fork()</strong>?
+</li>
+
+<li>
+What is the difference between a process and a thread?
+</li>
+
+<li>
+Why does a child process have a separate address space?
+</li>
+
+<li>
+Why is IPC required when using fork() for a multi-user chat server?
+</li>
+
+<li>
+What is the purpose of a pipe?
+</li>
+
+<li>
+Why is pthread preferred for the primary implementation?
+</li>
+
+<li>
+What happens when a child process terminates?
+</li>
+
+<li>
+What is the purpose of <strong>waitpid()</strong>?
+</li>
+
+</ol>
+
+</div>
+
+</div>
+
+
+<!-- ------------------------------------------------------ -->
+<!-- KEY TAKEAWAY -->
+<!-- ------------------------------------------------------ -->
+
+<div class="alert alert-success text-center">
+
+<h4>
+
+💡 Key Takeaway
+
+</h4>
+
+<p class="mb-0">
+
+<strong>
+
+pthread_create() → Thread-based concurrency
+
+</strong>
+
+<br>
+
+<strong>
+
+fork() → Process-based concurrency
+
+</strong>
+
+<br><br>
+
+Both approaches can be used to implement concurrent
+servers. For this laboratory, the
+<strong>pthread-based implementation is the primary method</strong>,
+while the <strong>fork()-based implementation is an optional
+alternative</strong> for further understanding.
+
+</p>
+
+</div>
+
+</section>
 <!-- ====================================================== -->
 <!-- MCQS -->
 <!-- ====================================================== -->
