@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>PCCST501 Assignments</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
 <link rel="stylesheet" href="assets/css/style.css">
 
+<style>
+.assignment-badge{font-size:.85rem}
+.assignment-card{transition:transform .2s,box-shadow .2s}
+.assignment-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.12)!important}
+.module-label{font-size:.8rem;letter-spacing:.04em}
+</style>
 </head>
 
 <body>
 
-<!-- Navigation -->
+<!-- ====================================================== -->
+<!-- NAVIGATION -->
+<!-- ====================================================== -->
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 <div class="container">
 
 <a class="navbar-brand" href="index.html">
-
 <i class="bi bi-diagram-3-fill"></i>
 PCCST501
-
 </a>
 
 </div>
 
 </nav>
 
-<!-- Hero -->
+
+<!-- ====================================================== -->
+<!-- HERO -->
+<!-- ====================================================== -->
 
 <section class="hero py-5 bg-primary text-white">
 
@@ -45,11 +49,12 @@ PCCST501
 <h1>📝 Assignments</h1>
 
 <p class="lead">
-Computer Networks PCCST501
+Computer Networks • PCCST501
 </p>
 
 <a href="https://github.com/S5CSA-VJCET-PCCST501/PCCST501-TEMPLATE/generate"
-class="btn btn-success btn-lg mt-3">
+class="btn btn-success btn-lg mt-3"
+target="_blank">
 
 🚀 Create My Assignment Repository
 
@@ -59,25 +64,62 @@ class="btn btn-success btn-lg mt-3">
 
 </section>
 
-<!-- Assignment Section -->
+
+<!-- ====================================================== -->
+<!-- ASSIGNMENTS -->
+<!-- ====================================================== -->
 
 <div class="container py-5">
 
+<div class="text-center mb-5">
+
+<h2>Module-wise Assignments</h2>
+
+<p class="text-muted">
+Four assignments covering all four modules of the prescribed PCCST501 syllabus.
+</p>
+<div class="alert alert-info d-inline-block mt-2 mb-0">
+<strong>📌 Each Assignment carries 15 Marks</strong>
+</div>
+
+</div>
+
+
 <div class="row g-4">
 
-<!-- Assignment Card -->
+
+<!-- ====================================================== -->
+<!-- ASSIGNMENT 1 -->
+<!-- ====================================================== -->
 
 <div class="col-lg-6">
 
-<div class="card shadow h-100">
+<div class="card shadow h-100 assignment-card">
 
 <div class="card-body">
 
-<h3>Assignment</h3>
+<div class="d-flex justify-content-between align-items-start">
 
-<h5>Internet & Application Layer</h5>
+<div>
 
-<p>CO1</p>
+<h3>Assignment 1</h3>
+
+<h5>
+Module 1 – Internet & Application Layer
+</h5>
+
+</div>
+
+<span class="badge bg-success assignment-badge">
+CO1
+</span>
+
+</div>
+
+<p>
+Internet overview, protocol layering, application-layer paradigms,
+WWW & HTTP, FTP, electronic mail, DNS, P2P networks and BitTorrent.
+</p>
 
 <p>
 📅 <strong>Due:</strong> 20 JULY 2026
@@ -97,25 +139,236 @@ Download Assignment
 
 </div>
 
-<!-- Submission Card -->
+
+<!-- ====================================================== -->
+<!-- ASSIGNMENT 2 -->
+<!-- ====================================================== -->
 
 <div class="col-lg-6">
 
-<div class="card shadow h-100">
+<div class="card shadow h-100 assignment-card">
+
+<div class="card-body">
+
+<div class="d-flex justify-content-between align-items-start">
+
+<div>
+
+<h3>Assignment 2</h3>
+
+<h5>
+Module 2 – Transport & Network Layer
+</h5>
+
+</div>
+
+<span class="badge bg-primary">
+CO2
+</span>
+
+</div>
+
+<p>
+Transport-layer services, UDP, TCP, sockets, TCP client/server,
+I/O multiplexing, UDP sockets, advanced I/O, network-layer protocols,
+unicast and multicast routing, intra-domain and inter-domain routing,
+next-generation IP, QoS and Linux routing-table concepts.
+</p>
+
+<p>
+📅 <strong>Due:</strong> 03 AUGUST 2026
+</p>
+
+<a href="assets/pdfs/Assignment2.pdf"
+class="btn btn-primary">
+
+<i class="bi bi-download"></i>
+Download Assignment
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ====================================================== -->
+<!-- ASSIGNMENT 3 -->
+<!-- ====================================================== -->
+
+<div class="col-lg-6">
+
+<div class="card shadow h-100 assignment-card">
+
+<div class="card-body">
+
+<div class="d-flex justify-content-between align-items-start">
+
+<div>
+
+<h3>Assignment 3</h3>
+
+<h5>
+Module 3 – Data-Link Layer & Wireless Networks
+</h5>
+
+</div>
+
+<span class="badge bg-primary">
+CO3
+</span>
+
+</div>
+
+<p>
+Data-link control, multiple access protocols, link-layer addressing,
+Ethernet, connecting devices, Wireless LANs, Mobile IP and
+data-link programming concepts using Datalink Provider Interface,
+SOCK_PACKET and PF_PACKET.
+</p>
+
+<p>
+📅 <strong>Due:</strong> 17 AUGUST 2026
+</p>
+
+<a href="assets/pdfs/Assignment3.pdf"
+class="btn btn-primary">
+
+<i class="bi bi-download"></i>
+Download Assignment
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ====================================================== -->
+<!-- ASSIGNMENT 4 -->
+<!-- ====================================================== -->
+
+<div class="col-lg-6">
+
+<div class="card shadow h-100 assignment-card">
+
+<div class="card-body">
+
+<div class="d-flex justify-content-between align-items-start">
+
+<div>
+
+<h3>Assignment 4</h3>
+
+<h5>
+Module 4 – SNMP, ASN.1 & Physical Layer
+</h5>
+
+</div>
+
+<span class="badge bg-primary">
+CO4
+</span>
+
+</div>
+
+
+<p>
+<strong>
+SNMP • ASN.1 • Data & Signals • Digital Transmission •
+Analog Transmission • Bandwidth Utilization • Transmission Media
+</strong>
+</p>
+
+
+<p>
+This assignment covers the complete Module 4 syllabus:
+</p>
+
+<ul class="mb-3">
+
+<li>SNMP</li>
+
+<li>ASN.1</li>
+
+<li>Data and Signals</li>
+
+<li>Digital Transmission</li>
+
+<li>Analog Transmission</li>
+
+<li>Bandwidth Utilization</li>
+
+<li>Transmission Media</li>
+
+</ul>
+
+
+<p class="text-muted">
+
+10 questions including conceptual analysis, diagrams,
+comparisons and a college-campus transmission-media case study.
+
+</p>
+
+
+<p>
+📅 <strong>Due:</strong> 31 AUGUST 2026
+</p>
+
+
+<a href="assets/pdfs/Assignment4_Module4.pdf"
+class="btn btn-primary">
+
+<i class="bi bi-download"></i>
+
+Download Assignment
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- ====================================================== -->
+<!-- SUBMISSION -->
+<!-- ====================================================== -->
+
+<section class="container py-5">
+
+<div class="card shadow">
 
 <div class="card-header bg-success text-white">
 
-<h4>Assignment Submission</h4>
+<h3 class="mb-0">
+📤 Assignment Submission
+</h3>
 
 </div>
 
 <div class="card-body">
 
+<div class="row g-4">
+
+<div class="col-md-7">
+
 <p>
 
-After completing the assignment,
-
-upload your work to GitHub and submit your repository link using the Google Form.
+After completing an assignment,
+upload your work to GitHub and submit
+your repository link using the Google Form.
 
 </p>
 
@@ -127,11 +380,16 @@ upload your work to GitHub and submit your repository link using the Google Form
 
 <li>✅ PDF Report</li>
 
-<li>✅ Network Diagram</li>
+<li>✅ Required diagrams/screenshots</li>
 
-<li>✅ Video (Optional)</li>
+<li>✅ Video demonstration where specified</li>
 
 </ul>
+
+</div>
+
+
+<div class="col-md-5 d-flex align-items-center">
 
 <a href="https://forms.gle/R2KCzKLrxHX75w88A"
 target="_blank"
@@ -149,9 +407,12 @@ class="btn btn-success w-100 btn-lg">
 
 </div>
 
-</div>
+</section>
 
-<!-- Workflow -->
+
+<!-- ====================================================== -->
+<!-- WORKFLOW -->
+<!-- ====================================================== -->
 
 <section class="container py-5">
 
@@ -160,6 +421,7 @@ class="btn btn-success w-100 btn-lg">
 <h2>GitHub Submission Workflow</h2>
 
 </div>
+
 
 <div class="row text-center">
 
@@ -171,6 +433,7 @@ class="btn btn-success w-100 btn-lg">
 
 </div>
 
+
 <div class="col-md">
 
 <h1>2️⃣</h1>
@@ -178,6 +441,7 @@ class="btn btn-success w-100 btn-lg">
 <p>Complete Work</p>
 
 </div>
+
 
 <div class="col-md">
 
@@ -187,6 +451,7 @@ class="btn btn-success w-100 btn-lg">
 
 </div>
 
+
 <div class="col-md">
 
 <h1>4️⃣</h1>
@@ -194,6 +459,7 @@ class="btn btn-success w-100 btn-lg">
 <p>Copy Repository Link</p>
 
 </div>
+
 
 <div class="col-md">
 
@@ -207,7 +473,10 @@ class="btn btn-success w-100 btn-lg">
 
 </section>
 
-<!-- Rubric -->
+
+<!-- ====================================================== -->
+<!-- RUBRIC -->
+<!-- ====================================================== -->
 
 <section class="container py-5">
 
@@ -218,6 +487,7 @@ class="btn btn-success w-100 btn-lg">
 <h3>Evaluation Rubric</h3>
 
 </div>
+
 
 <div class="card-body">
 
@@ -235,13 +505,14 @@ class="btn btn-success w-100 btn-lg">
 
 </thead>
 
+
 <tbody>
 
 <tr>
 
 <td>Correct Solution</td>
 
-<td>4</td>
+<td>6</td>
 
 </tr>
 
@@ -249,7 +520,7 @@ class="btn btn-success w-100 btn-lg">
 
 <td>Documentation</td>
 
-<td>2</td>
+<td>3</td>
 
 </tr>
 
@@ -257,7 +528,7 @@ class="btn btn-success w-100 btn-lg">
 
 <td>GitHub Repository</td>
 
-<td>2</td>
+<td>3</td>
 
 </tr>
 
@@ -265,15 +536,19 @@ class="btn btn-success w-100 btn-lg">
 
 <td>Presentation</td>
 
-<td>2</td>
+<td>3</td>
 
 </tr>
 
 <tr class="table-success">
 
-<td><strong>Total</strong></td>
+<td>
+<strong>Total</strong>
+</td>
 
-<td><strong>10</strong></td>
+<td>
+<strong>10</strong>
+</td>
 
 </tr>
 
@@ -287,7 +562,10 @@ class="btn btn-success w-100 btn-lg">
 
 </section>
 
-<!-- Footer -->
+
+<!-- ====================================================== -->
+<!-- FOOTER -->
+<!-- ====================================================== -->
 
 <footer class="bg-dark text-white text-center p-4 mt-5">
 
@@ -295,10 +573,9 @@ class="btn btn-success w-100 btn-lg">
 
 </footer>
 
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
 </html>
-```
-
