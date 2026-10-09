@@ -81,14 +81,32 @@ footer{background:#082f6b;color:#fff;padding:25px;margin-top:60px}.accordion-but
 <li>Cisco Packet Tracer</li><li>Routers and interfaces corresponding to Figure 1</li><li>Appropriate cables/links</li><li>IPv4 addresses from Figure 1</li><li>All interfaces configured with the /24 mask specified in the syllabus</li>
 </ul></div></div></section>
 
-<section class="container py-4"><h2 class="section-title">📝 Procedure</h2>
+<section class="container py-4"><h2 class="section-title">📝 Step-by-Step Procedure</h2>
+<div class="alert alert-warning"><strong>Addressing note:</strong> Use the exact IP addresses printed in your original Figure 1. The screenshot available to us crops most of the address column, so this page deliberately uses placeholders rather than inventing addresses. The manual specifies a /24 mask (255.255.255.0) for all interfaces.</div>
 <div class="card"><div class="card-body p-4">
-<div class="step p-3 mb-3"><h5>Step 1 – Build the topology</h5><p class="mb-0">Open Cisco Packet Tracer and create the router topology shown in Figure 1. Connect the interfaces exactly as specified.</p></div>
-<div class="step p-3 mb-3"><h5>Step 2 – Configure interface addresses</h5><p class="mb-0">Assign each interface its address from Figure 1 and use the /24 subnet mask.</p></div>
-<div class="step p-3 mb-3"><h5>Step 3 – Enable interfaces</h5><p class="mb-0">Enter interface configuration mode and use <code>no shutdown</code>. Verify the interface status.</p></div>
-<div class="step p-3 mb-3"><h5>Step 4 – Add static routes</h5><p class="mb-0">On each router, add routes for remote networks that are not already directly connected.</p></div>
-<div class="step p-3 mb-3"><h5>Step 5 – Display the routing table</h5><p class="mb-0">Use <code>show ip route</code> and identify the static routes.</p></div>
-<div class="step p-3"><h5>Step 6 – Verify connectivity</h5><p class="mb-0">Use <code>ping</code> between appropriate hosts/interfaces and confirm successful end-to-end communication.</p></div>
+<div class="step p-3 mb-3"><h5>Step 1 – Place and connect the routers</h5><ol><li>Open Cisco Packet Tracer and choose <strong>Network Devices → Routers</strong>.</li><li>Place the available router models to reproduce the four-router chain in Figure 1: left router → 2501A equivalent → 2501B equivalent → right router.</li><li>If 2621/2501 models are unavailable, use supported models. Match the required interface roles; the interface names may differ.</li><li>Connect Ethernet links with the appropriate Ethernet cable and serial router-to-router links with serial cables. Install compatible serial modules if needed.</li><li>If a serial end is DCE, set a clock rate on that end, for example <code>clock rate 64000</code>, after entering that serial interface.</li></ol></div>
+<div class="step p-3 mb-3"><h5>Step 2 – Open the CLI and identify interface names</h5><p>Click a router → <strong>CLI</strong> → press Enter. If asked about the initial configuration dialog, answer <code>no</code>. Then enter:</p><pre class="command">Router&gt; enable
+Router# show ip interface brief
+Router# show interfaces</pre><p class="mb-0">Use the interface names actually listed by your router (for example, <code>GigabitEthernet0/0</code>, <code>FastEthernet0/0</code>, or <code>Serial0/0/0</code>).</p></div>
+<div class="step p-3 mb-3"><h5>Step 3 – Configure each interface</h5><p>Repeat for every interface shown in Figure 1. Replace the placeholders with the correct interface name and address from the original address table.</p><pre class="command">Router&gt; enable
+Router# configure terminal
+Router(config)# interface &lt;INTERFACE-NAME&gt;
+Router(config-if)# ip address &lt;IP-ADDRESS&gt; 255.255.255.0
+Router(config-if)# no shutdown
+Router(config-if)# exit
+Router(config)# end</pre><p>Repeat on all routers. Do not assign the same IP address to two interfaces. Each separate link/LAN must use addresses consistent with the original figure.</p></div>
+<div class="step p-3 mb-3"><h5>Step 4 – Check interface status before routing</h5><pre class="command">Router# show ip interface brief</pre><p class="mb-0">Confirm that each used interface is <code>up/up</code>. If it is administratively down, enter interface configuration mode and issue <code>no shutdown</code>. Check cabling, module installation, IP addresses and (for DCE serial links) clock rate if a link remains down.</p></div>
+<div class="step p-3 mb-3"><h5>Step 5 – Find directly connected and remote networks</h5><p>Run <code>show ip route</code> on each router. Networks attached to active local interfaces appear as connected routes (code <strong>C</strong>). Every other destination network that must be reached needs a static route unless another route already exists.</p></div>
+<div class="step p-3 mb-3"><h5>Step 6 – Add static routes on every router</h5><p>Use the following command format in global configuration mode. Add one route for each remote network not directly connected to that router.</p><pre class="command">Router&gt; enable
+Router# configure terminal
+Router(config)# ip route &lt;DESTINATION-NETWORK&gt; 255.255.255.0 &lt;NEXT-HOP-IP&gt;
+Router(config)# end</pre><ul><li><strong>Destination network:</strong> the remote network's network address from Figure 1.</li><li><strong>Next-hop IP:</strong> the IP address of the adjacent router interface toward that destination.</li><li>Configure routes in both directions so that return traffic can reach the source.</li></ul><div class="alert alert-info mb-0">Do not paste example addresses from other topologies. Choose the destination and next-hop values using the actual Figure 1 addressing table.</div></div>
+<div class="step p-3 mb-3"><h5>Step 7 – Display and record the routing table</h5><pre class="command">Router# show ip route
+Router# show ip route static</pre><p class="mb-0">Look for <strong>S</strong> entries for static routes, <strong>C</strong> for directly connected networks, and (on many IOS versions) <strong>L</strong> for local interface addresses. Repeat on all routers and record the output for your lab report.</p></div>
+<div class="step p-3 mb-3"><h5>Step 8 – Test connectivity with ping</h5><pre class="command">Router# ping &lt;NEXT-HOP-IP&gt;
+Router# ping &lt;REMOTE-INTERFACE-IP&gt;
+PC&gt; ping &lt;REMOTE-PC-IP&gt;</pre><p class="mb-0">Start with a directly connected neighbor, then test a remote router/LAN and finally end-to-end host connectivity if PCs are included. A successful ping typically shows <code>!!!!!</code> or a 100% success rate. The first ping may time out while ARP resolves; repeat the test.</p></div>
+<div class="step p-3"><h5>Step 9 – Save the configuration</h5><pre class="command">Router# copy running-config startup-config</pre><p class="mb-0">Press Enter to accept the default destination filename if prompted. Save on every router.</p></div>
 </div></div></section>
 
 <section id="commands" class="container py-4"><h2 class="section-title">⌨️ Static Routing Commands</h2>
